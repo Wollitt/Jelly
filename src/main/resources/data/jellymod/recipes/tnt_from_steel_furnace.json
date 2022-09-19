@@ -1,0 +1,11 @@
+{
+  "type": "jellymod:steel_furnace",
+  "ingredients": [
+    {
+      "item": "minecraft:stone"
+    }
+  ],
+  "output": {
+    "item": "minecraft:stone"
+  }
+}
