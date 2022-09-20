@@ -1,8 +1,9 @@
-package com.wollit.jelly.screen;
+package com.wollit.jelly.screen.basic_crusher;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wollit.jelly.JellyMod;
+import com.wollit.jelly.screen.basic_crusher.BasicCrusherMenu;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;

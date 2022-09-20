@@ -1,7 +1,7 @@
-package com.wollit.jelly.blocks;
+package com.wollit.jelly.blocks.custom;
 
-import com.wollit.jelly.Init.EntityBlockInit;
-import com.wollit.jelly.blocks.entity.BasicCrusherBlockEntity;
+import com.wollit.jelly.blocks.entity.ModBlockEntities;
+import com.wollit.jelly.blocks.entity.custom.BasicCrusherBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -103,6 +103,6 @@ public class BasicCrusherBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
-        return createTickerHelper(blockEntityType, EntityBlockInit.BASIC_CRUSHER_ENTITY.get(), BasicCrusherBlockEntity::tick);
+        return createTickerHelper(blockEntityType, ModBlockEntities.BASIC_CRUSHER_ENTITY.get(), BasicCrusherBlockEntity::tick);
     }
 }

@@ -1,8 +1,8 @@
-package com.wollit.jelly.blocks.entity;
+package com.wollit.jelly.blocks.entity.custom;
 
-import com.wollit.jelly.Init.EntityBlockInit;
+import com.wollit.jelly.blocks.entity.ModBlockEntities;
 import com.wollit.jelly.recipe.BasicCrusherRecipe;
-import com.wollit.jelly.screen.BasicCrusherMenu;
+import com.wollit.jelly.screen.basic_crusher.BasicCrusherMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -16,9 +16,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -31,7 +28,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
-import java.util.Random;
 
 public class BasicCrusherBlockEntity extends BlockEntity implements MenuProvider {
     // Set number of slots
@@ -49,7 +45,7 @@ public class BasicCrusherBlockEntity extends BlockEntity implements MenuProvider
 
 
     public BasicCrusherBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(EntityBlockInit.BASIC_CRUSHER_ENTITY.get(), blockPos, blockState);
+        super(ModBlockEntities.BASIC_CRUSHER_ENTITY.get(), blockPos, blockState);
 
         this.data = new ContainerData() {
             @Override

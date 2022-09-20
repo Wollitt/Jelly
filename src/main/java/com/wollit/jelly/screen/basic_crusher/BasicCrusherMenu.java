@@ -1,8 +1,8 @@
-package com.wollit.jelly.screen;
+package com.wollit.jelly.screen.basic_crusher;
 
-import com.wollit.jelly.Init.BlockInit;
-import com.wollit.jelly.Init.MenuTypeInit;
-import com.wollit.jelly.blocks.entity.BasicCrusherBlockEntity;
+import com.wollit.jelly.blocks.ModBlocks;
+import com.wollit.jelly.screen.ModMenuTypes;
+import com.wollit.jelly.blocks.entity.custom.BasicCrusherBlockEntity;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -23,7 +23,7 @@ public class BasicCrusherMenu extends AbstractContainerMenu {
     }
 
     public BasicCrusherMenu(int containerId, Inventory inventory, BlockEntity blockEntity, ContainerData data) {
-        super(MenuTypeInit.BASIC_CRUSHER_MENU.get(), containerId);
+        super(ModMenuTypes.BASIC_CRUSHER_MENU.get(), containerId);
         checkContainerSize(inventory, 2);
         this.blockEntity = (BasicCrusherBlockEntity) blockEntity;
         this.level = inventory.player.level;
@@ -105,7 +105,7 @@ public class BasicCrusherMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, BlockInit.BASIC_CRUSHER.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, ModBlocks.BASIC_CRUSHER.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

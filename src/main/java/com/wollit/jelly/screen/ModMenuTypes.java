@@ -1,7 +1,7 @@
-package com.wollit.jelly.Init;
+package com.wollit.jelly.screen;
 
 import com.wollit.jelly.JellyMod;
-import com.wollit.jelly.screen.BasicCrusherMenu;
+import com.wollit.jelly.screen.basic_crusher.BasicCrusherMenu;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
@@ -10,7 +10,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class MenuTypeInit {
+public class ModMenuTypes {
     public static final DeferredRegister<MenuType<?>> MENU_TYPES =
             DeferredRegister.create(ForgeRegistries.CONTAINERS, JellyMod.MOD_ID);
 

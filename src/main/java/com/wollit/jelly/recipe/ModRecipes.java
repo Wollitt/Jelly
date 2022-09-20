@@ -1,4 +1,4 @@
-package com.wollit.jelly.Init;
+package com.wollit.jelly.recipe;
 
 import com.wollit.jelly.JellyMod;
 import com.wollit.jelly.recipe.BasicCrusherRecipe;
@@ -7,7 +7,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class RecipeInit {
+public class ModRecipes {
     public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS =
             DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, JellyMod.MOD_ID);
 

@@ -1,8 +1,12 @@
 package com.wollit.jelly;
 
 import com.mojang.logging.LogUtils;
-import com.wollit.jelly.Init.*;
-import com.wollit.jelly.screen.BasicCrusherScreen;
+import com.wollit.jelly.blocks.ModBlocks;
+import com.wollit.jelly.blocks.entity.ModBlockEntities;
+import com.wollit.jelly.items.ModItems;
+import com.wollit.jelly.recipe.ModRecipes;
+import com.wollit.jelly.screen.ModMenuTypes;
+import com.wollit.jelly.screen.basic_crusher.BasicCrusherScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -28,18 +32,18 @@ public class JellyMod
         modEventBus.addListener(this::setup);
         modEventBus.addListener(this::clientSetup);
 
-        ItemInit.ITEMS.register(modEventBus);
-        EntityBlockInit.BlOCK_ENTITY_TYPES.register(modEventBus);
-        BlockInit.BLOCKS.register(modEventBus);
-        MenuTypeInit.MENU_TYPES.register(modEventBus);
-        RecipeInit.SERIALIZERS.register(modEventBus);
+        ModItems.ITEMS.register(modEventBus);
+        ModBlockEntities.BlOCK_ENTITY_TYPES.register(modEventBus);
+        ModBlocks.BLOCKS.register(modEventBus);
+        ModMenuTypes.MENU_TYPES.register(modEventBus);
+        ModRecipes.SERIALIZERS.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
-        MenuScreens.register(MenuTypeInit.BASIC_CRUSHER_MENU.get(), BasicCrusherScreen::new);
+        MenuScreens.register(ModMenuTypes.BASIC_CRUSHER_MENU.get(), BasicCrusherScreen::new);
     }
 
     private void setup(final FMLCommonSetupEvent event)
