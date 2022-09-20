@@ -2,7 +2,7 @@ package com.wollit.jelly.screen;
 
 import com.wollit.jelly.Init.BlockInit;
 import com.wollit.jelly.Init.MenuTypeInit;
-import com.wollit.jelly.blocks.entity.SteelFurnaceBlockEntity;
+import com.wollit.jelly.blocks.entity.BasicCrusherBlockEntity;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -13,19 +13,19 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class SteelFurnaceMenu extends AbstractContainerMenu {
-    private final SteelFurnaceBlockEntity blockEntity;
+public class BasicCrusherMenu extends AbstractContainerMenu {
+    private final BasicCrusherBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;
 
-    public SteelFurnaceMenu(int containerId, Inventory inventory, FriendlyByteBuf extraData) {
+    public BasicCrusherMenu(int containerId, Inventory inventory, FriendlyByteBuf extraData) {
         this(containerId, inventory, inventory.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
     }
 
-    public SteelFurnaceMenu(int containerId, Inventory inventory, BlockEntity blockEntity, ContainerData data) {
-        super(MenuTypeInit.STEEL_FURNACE_MENU.get(), containerId);
-        checkContainerSize(inventory, 4);
-        this.blockEntity = (SteelFurnaceBlockEntity) blockEntity;
+    public BasicCrusherMenu(int containerId, Inventory inventory, BlockEntity blockEntity, ContainerData data) {
+        super(MenuTypeInit.BASIC_CRUSHER_MENU.get(), containerId);
+        checkContainerSize(inventory, 2);
+        this.blockEntity = (BasicCrusherBlockEntity) blockEntity;
         this.level = inventory.player.level;
         this.data = data;
 
@@ -33,10 +33,8 @@ public class SteelFurnaceMenu extends AbstractContainerMenu {
         addPlayerHotbar(inventory);
 
         this.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
-            this.addSlot(new SlotItemHandler(handler, 0, 34, 40));
-            this.addSlot(new SlotItemHandler(handler, 1, 57, 18));
-            this.addSlot(new SlotItemHandler(handler, 2, 103, 18));
-            this.addSlot(new SlotItemHandler(handler, 3, 80, 60));
+            this.addSlot(new SlotItemHandler(handler, 0, 80, 10));
+            this.addSlot(new SlotItemHandler(handler, 1, 80, 60));
         });
 
         addDataSlots(data);
@@ -49,7 +47,7 @@ public class SteelFurnaceMenu extends AbstractContainerMenu {
     public int getScaledProgress() {
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1);
-        int progressArrowSize = 26;
+        int progressArrowSize = 25;
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
@@ -70,7 +68,7 @@ public class SteelFurnaceMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 4;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 2;  // must be the number of slots you have!
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
@@ -107,7 +105,7 @@ public class SteelFurnaceMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, BlockInit.STEEL_FURNACE.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, BlockInit.BASIC_CRUSHER.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

@@ -13,12 +13,12 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
-public class SteelFurnaceRecipe implements Recipe<SimpleContainer> {
+public class BasicCrusherRecipe implements Recipe<SimpleContainer> {
     private final ResourceLocation id;
     private final ItemStack output;
     private final NonNullList<Ingredient> recipeItems;
 
-    public SteelFurnaceRecipe(ResourceLocation id, ItemStack output, NonNullList<Ingredient> recipeItems) {
+    public BasicCrusherRecipe(ResourceLocation id, ItemStack output, NonNullList<Ingredient> recipeItems) {
         this.id = id;
         this.output = output;
         this.recipeItems = recipeItems;
@@ -27,7 +27,7 @@ public class SteelFurnaceRecipe implements Recipe<SimpleContainer> {
 
     @Override
     public boolean matches(SimpleContainer container, Level level) {
-        return recipeItems.get(0).test(container.getItem(1));
+        return recipeItems.get(0).test(container.getItem(0));
     }
 
     @Override
@@ -60,18 +60,18 @@ public class SteelFurnaceRecipe implements Recipe<SimpleContainer> {
         return Type.INSTANCE;
     }
 
-    public static class Type implements RecipeType<SteelFurnaceRecipe> {
+    public static class Type implements RecipeType<BasicCrusherRecipe> {
         private Type() {}
         public static Type INSTANCE = new Type();
-        public static final String ID = "steel_furnace";
+        public static final String ID = "basic_crusher";
     }
 
-    public static class Serializer implements RecipeSerializer<SteelFurnaceRecipe> {
+    public static class Serializer implements RecipeSerializer<BasicCrusherRecipe> {
         public static final Serializer INSTANCE = new Serializer();
-        public static final ResourceLocation ID = new ResourceLocation(JellyMod.MOD_ID, "steel_furnace");
+        public static final ResourceLocation ID = new ResourceLocation(JellyMod.MOD_ID, "basic_crusher");
 
         @Override
-        public SteelFurnaceRecipe fromJson(ResourceLocation id, JsonObject json) {
+        public BasicCrusherRecipe fromJson(ResourceLocation id, JsonObject json) {
             ItemStack output = ShapedRecipe. itemStackFromJson(GsonHelper.getAsJsonObject(json, "output"));
 
             JsonArray ingredients = GsonHelper.getAsJsonArray(json, "ingredients");
@@ -80,12 +80,12 @@ public class SteelFurnaceRecipe implements Recipe<SimpleContainer> {
                     inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
                 }
 
-                return new SteelFurnaceRecipe(id, output, inputs);
+                return new BasicCrusherRecipe(id, output, inputs);
         }
 
         @Nullable
         @Override
-        public SteelFurnaceRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
+        public BasicCrusherRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
             NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readInt(), Ingredient.EMPTY);
 
             for (int i = 0; i < inputs.size(); ++i) {
@@ -93,11 +93,11 @@ public class SteelFurnaceRecipe implements Recipe<SimpleContainer> {
             }
 
             ItemStack output = buf.readItem();
-            return new SteelFurnaceRecipe(id, output, inputs);
+            return new BasicCrusherRecipe(id, output, inputs);
         }
 
         @Override
-        public void toNetwork(FriendlyByteBuf buf, SteelFurnaceRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf buf, BasicCrusherRecipe recipe) {
             buf.writeInt(recipe.getIngredients().size());
             for (Ingredient ing : recipe.getIngredients()) {
                 ing.toNetwork(buf);

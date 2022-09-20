@@ -1,5 +1,8 @@
 {
   "itemGroup.jellymod": "Jelly Mod Items",
 
-  "block.jellymod.steel_furnace": "Steel Furnace"
+  "item.jellymod.steel_ingot": "Steel ingot",
+  "item.jellymod.coal_dust": "Coal dust",
+
+  "block.jellymod.basic_crusher": "Basic Crusher"
 }

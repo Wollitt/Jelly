@@ -1,7 +1,7 @@
 package com.wollit.jelly.Init;
 
 import com.wollit.jelly.JellyMod;
-import com.wollit.jelly.blocks.SteelFurnaceBlock;
+import com.wollit.jelly.blocks.BasicCrusherBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -20,8 +20,8 @@ public class BlockInit {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, JellyMod.MOD_ID);
 
-    public static final RegistryObject<Block> STEEL_FURNACE = BLOCKS.register("steel_furnace",
-            () -> new SteelFurnaceBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
+    public static final RegistryObject<Block> BASIC_CRUSHER = BLOCKS.register("basic_crusher",
+            () -> new BasicCrusherBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
 
     @SubscribeEvent
     public static void onRegisterItems(final RegistryEvent.Register<Item> event) {

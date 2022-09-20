@@ -13,6 +13,12 @@ public class ItemInit {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, JellyMod.MOD_ID);
 
+    public static final RegistryObject<Item> STEEL_INGOT = ITEMS.register("steel_ingot",
+            () -> new Item(new Item.Properties().tab(ModCreativeTab.instance)));
+
+    public static final RegistryObject<Item> COAL_POWDER = ITEMS.register("coal_dust",
+            () -> new Item(new Item.Properties().tab(ModCreativeTab.instance)));
+
 
     public static class ModCreativeTab extends CreativeModeTab {
         private ModCreativeTab(int index, String label) {

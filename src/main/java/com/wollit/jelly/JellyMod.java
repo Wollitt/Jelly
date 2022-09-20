@@ -2,7 +2,7 @@ package com.wollit.jelly;
 
 import com.mojang.logging.LogUtils;
 import com.wollit.jelly.Init.*;
-import com.wollit.jelly.screen.SteelFurnaceScreen;
+import com.wollit.jelly.screen.BasicCrusherScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -39,7 +39,7 @@ public class JellyMod
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
-        MenuScreens.register(MenuTypeInit.STEEL_FURNACE_MENU.get(), SteelFurnaceScreen::new);
+        MenuScreens.register(MenuTypeInit.BASIC_CRUSHER_MENU.get(), BasicCrusherScreen::new);
     }
 
     private void setup(final FMLCommonSetupEvent event)

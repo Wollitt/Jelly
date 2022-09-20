@@ -1,7 +1,7 @@
 package com.wollit.jelly.blocks;
 
 import com.wollit.jelly.Init.EntityBlockInit;
-import com.wollit.jelly.blocks.entity.SteelFurnaceBlockEntity;
+import com.wollit.jelly.blocks.entity.BasicCrusherBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -24,10 +25,11 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
-public class SteelFurnaceBlock extends BaseEntityBlock {
+public class BasicCrusherBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
-    public SteelFurnaceBlock(Properties properties) {
+    public BasicCrusherBlock(Properties properties) {
         super(properties);
     }
 
@@ -72,8 +74,8 @@ public class SteelFurnaceBlock extends BaseEntityBlock {
     public void onRemove(BlockState blockState, Level level, BlockPos blockPos, BlockState blockStateNew, boolean pIsMoving) {
         if (blockState.getBlock() != blockStateNew.getBlock()) {
             BlockEntity blockEntity = level.getBlockEntity(blockPos);
-            if (blockEntity instanceof SteelFurnaceBlockEntity) {
-                ((SteelFurnaceBlockEntity)blockEntity).drops();
+            if (blockEntity instanceof BasicCrusherBlockEntity) {
+                ((BasicCrusherBlockEntity)blockEntity).drops();
             }
         }
         super.onRemove(blockState, level, blockPos, blockStateNew, pIsMoving);
@@ -83,8 +85,8 @@ public class SteelFurnaceBlock extends BaseEntityBlock {
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand hand, BlockHitResult hit) {
         if(!level.isClientSide()) {
             BlockEntity blockEntity = level.getBlockEntity(blockPos);
-            if(blockEntity instanceof SteelFurnaceBlockEntity) {
-                NetworkHooks.openGui(((ServerPlayer) player), (SteelFurnaceBlockEntity)blockEntity, blockPos);
+            if(blockEntity instanceof BasicCrusherBlockEntity) {
+                NetworkHooks.openGui(((ServerPlayer) player), (BasicCrusherBlockEntity)blockEntity, blockPos);
             } else {
                 throw new IllegalStateException("Our container provider is missing");
             }
@@ -95,12 +97,12 @@ public class SteelFurnaceBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new SteelFurnaceBlockEntity(blockPos, blockState);
+        return new BasicCrusherBlockEntity(blockPos, blockState);
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
-        return createTickerHelper(blockEntityType, EntityBlockInit.STEEL_FURNACE_ENTITY.get(), SteelFurnaceBlockEntity::tick);
+        return createTickerHelper(blockEntityType, EntityBlockInit.BASIC_CRUSHER_ENTITY.get(), BasicCrusherBlockEntity::tick);
     }
 }

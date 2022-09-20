@@ -9,11 +9,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class SteelFurnaceScreen extends AbstractContainerScreen<SteelFurnaceMenu> {
+public class BasicCrusherScreen extends AbstractContainerScreen<BasicCrusherMenu> {
     public static final ResourceLocation TEXTURE =
-            new ResourceLocation(JellyMod.MOD_ID, "textures/gui/steel_furnace_gui.png");
+            new ResourceLocation(JellyMod.MOD_ID, "textures/gui/basic_crusher_gui.png");
 
-    public SteelFurnaceScreen(SteelFurnaceMenu menu, Inventory inventory, Component component) {
+    public BasicCrusherScreen(BasicCrusherMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component);
     }
 
@@ -29,7 +29,7 @@ public class SteelFurnaceScreen extends AbstractContainerScreen<SteelFurnaceMenu
         this.blit(poseStack, x, y, 0, 0, imageWidth, imageHeight);
 
         if (menu.isCrafting()) {
-            blit(poseStack, x + 102, y + 41, 176, 0, 8, menu.getScaledProgress());
+            blit(poseStack, x + 85, y + 31, 178, 2, 18, menu.getScaledProgress());
         }
     }
 

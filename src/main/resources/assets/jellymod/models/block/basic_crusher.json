@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "jellymod:machines/steel_furnace_texture",
+		"0": "jellymod:machines/basic_crusher_texture",
 		"particle": "minecraft:block/iron_block"
 	},
 	"elements": [
