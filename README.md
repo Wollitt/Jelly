@@ -1,1 +1,1 @@
-# Minecraft mod - In progress
+# Jelly mod - Minecraft mod in progress
