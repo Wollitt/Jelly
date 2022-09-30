@@ -1,7 +1,7 @@
 package com.wollit.jelly.blocks.custom;
 
 import com.wollit.jelly.blocks.entity.ModBlockEntities;
-import com.wollit.jelly.blocks.entity.custom.BasicCrusherBlockEntity;
+import com.wollit.jelly.blocks.entity.custom.BasicAlloyFurnaceBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -24,14 +24,14 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
-public class BasicCrusherBlock extends BaseEntityBlock {
+public class BasicAlloyFurnaceBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-    public BasicCrusherBlock(Properties properties) {
+    public BasicAlloyFurnaceBlock(Properties properties) {
         super(properties);
     }
 
-    private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 10, 16);
+    private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 16, 16);
 
     @Override
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext context) {
@@ -72,8 +72,8 @@ public class BasicCrusherBlock extends BaseEntityBlock {
     public void onRemove(BlockState blockState, Level level, BlockPos blockPos, BlockState blockStateNew, boolean pIsMoving) {
         if (blockState.getBlock() != blockStateNew.getBlock()) {
             BlockEntity blockEntity = level.getBlockEntity(blockPos);
-            if (blockEntity instanceof BasicCrusherBlockEntity) {
-                ((BasicCrusherBlockEntity)blockEntity).drops();
+            if (blockEntity instanceof BasicAlloyFurnaceBlockEntity) {
+                ((BasicAlloyFurnaceBlockEntity)blockEntity).drops();
             }
         }
         super.onRemove(blockState, level, blockPos, blockStateNew, pIsMoving);
@@ -83,8 +83,8 @@ public class BasicCrusherBlock extends BaseEntityBlock {
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand hand, BlockHitResult hit) {
         if(!level.isClientSide()) {
             BlockEntity blockEntity = level.getBlockEntity(blockPos);
-            if(blockEntity instanceof BasicCrusherBlockEntity) {
-                NetworkHooks.openGui(((ServerPlayer) player), (BasicCrusherBlockEntity)blockEntity, blockPos);
+            if(blockEntity instanceof BasicAlloyFurnaceBlockEntity) {
+                NetworkHooks.openGui(((ServerPlayer) player), (BasicAlloyFurnaceBlockEntity)blockEntity, blockPos);
             } else {
                 throw new IllegalStateException("Our container provider is missing");
             }
@@ -95,12 +95,14 @@ public class BasicCrusherBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new BasicCrusherBlockEntity(blockPos, blockState);
+        return new BasicAlloyFurnaceBlockEntity(blockPos, blockState);
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
-        return createTickerHelper(blockEntityType, ModBlockEntities.BASIC_CRUSHER_ENTITY.get(), BasicCrusherBlockEntity::tick);
+        return createTickerHelper(blockEntityType, ModBlockEntities.BASIC_ALLOY_FURNACE_ENTITY.get(), BasicAlloyFurnaceBlockEntity::tick);
     }
+
+
 }

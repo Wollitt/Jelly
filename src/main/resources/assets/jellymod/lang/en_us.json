@@ -9,6 +9,8 @@
   "item.jellymod.miner_chestplate": "Miner's Chestplate",
   "item.jellymod.miner_leggings": "Miner's Leggings",
   "item.jellymod.miner_boots": "Miner's Boots",
+  "item.jellymod.iron_dust": "Iron Dust",
 
-  "block.jellymod.basic_crusher": "Basic Crusher"
+  "block.jellymod.basic_crusher": "Basic Crusher",
+  "block.jellymod.basic_alloy_furnace": "Basic Alloy Furnace"
 }

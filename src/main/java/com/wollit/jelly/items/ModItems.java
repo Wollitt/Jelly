@@ -28,6 +28,9 @@ public class ModItems {
     public static final RegistryObject<Item> BRONZE_DUST = ITEMS.register("bronze_dust",
             () -> new Item(new Item.Properties().tab(ModCreativeTab.instance)));
 
+    public static final RegistryObject<Item> IRON_DUST = ITEMS.register("iron_dust",
+            () -> new Item(new Item.Properties().tab(ModCreativeTab.instance)));
+
     public static final RegistryObject<Item> MINER_HELMET = ITEMS.register("miner_helmet",
             () -> new ModArmorItem(ModArmorMaterial.MINER, EquipmentSlot.HEAD,
                     new Item.Properties().tab(ModCreativeTab.instance)));

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model":  "jellymod:block/basic_alloy_furnace"},
+    "facing=east": { "model":  "jellymod:block/basic_alloy_furnace", "y":  90},
+    "facing=south": { "model":  "jellymod:block/basic_alloy_furnace", "y":  180},
+    "facing=west": { "model":  "jellymod:block/basic_alloy_furnace", "y":  270}
+  }
+}

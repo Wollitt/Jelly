@@ -1,5 +1,6 @@
 package com.wollit.jelly.blocks;
 
+import com.wollit.jelly.blocks.custom.BasicAlloyFurnaceBlock;
 import com.wollit.jelly.items.ModItems;
 import com.wollit.jelly.JellyMod;
 import com.wollit.jelly.blocks.custom.BasicCrusherBlock;
@@ -23,6 +24,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> BASIC_CRUSHER = BLOCKS.register("basic_crusher",
             () -> new BasicCrusherBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
+
+    public static final RegistryObject<Block> BASIC_ALLOY_FURNACE = BLOCKS.register("basic_alloy_furnace",
+            () -> new BasicAlloyFurnaceBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
 
 
     @SubscribeEvent

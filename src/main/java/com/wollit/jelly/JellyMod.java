@@ -7,6 +7,7 @@ import com.wollit.jelly.items.ModItems;
 import com.wollit.jelly.recipe.ModRecipes;
 import com.wollit.jelly.screen.ModMenuTypes;
 import com.wollit.jelly.screen.basic_crusher.BasicCrusherScreen;
+import com.wollit.jelly.screen.basic_alloy_furnace.BasicAlloyFurnaceScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -44,6 +45,7 @@ public class JellyMod
 
     private void clientSetup(final FMLClientSetupEvent event) {
         MenuScreens.register(ModMenuTypes.BASIC_CRUSHER_MENU.get(), BasicCrusherScreen::new);
+        MenuScreens.register(ModMenuTypes.BASIC_ALLOY_FURNACE_MENU.get(), BasicAlloyFurnaceScreen::new);
     }
 
     private void setup(final FMLCommonSetupEvent event)

@@ -1,4 +1,4 @@
-package com.wollit.jelly.screen.basic_crusher;
+package com.wollit.jelly.screen.basic_alloy_furnace;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -8,17 +8,18 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import org.jetbrains.annotations.NotNull;
 
-public class BasicCrusherScreen extends AbstractContainerScreen<BasicCrusherMenu> {
+public class BasicAlloyFurnaceScreen extends AbstractContainerScreen<BasicAlloyFurnaceMenu> {
     public static final ResourceLocation TEXTURE =
-            new ResourceLocation(JellyMod.MOD_ID, "textures/gui/basic_crusher_gui.png");
+            new ResourceLocation(JellyMod.MOD_ID, "textures/gui/basic_alloy_furnace_gui.png");
 
-    public BasicCrusherScreen(BasicCrusherMenu menu, Inventory inventory, Component component) {
+    public BasicAlloyFurnaceScreen(BasicAlloyFurnaceMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component);
     }
 
     @Override
-    protected void renderBg(PoseStack poseStack, float partialTick, int mouseX, int mouseY) {
+    protected void renderBg(@NotNull PoseStack poseStack, float partialTick, int mouseX, int mouseY) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, TEXTURE);
@@ -29,7 +30,7 @@ public class BasicCrusherScreen extends AbstractContainerScreen<BasicCrusherMenu
         this.blit(poseStack, x, y, 0, 0, imageWidth, imageHeight);
 
         if (menu.isCrafting()) {
-            blit(poseStack, x + 85, y + 31, 178, 2, 18, menu.getScaledProgress());
+            blit(poseStack, x + 153, y + 43, 177, 2, 14, menu.getScaledProgress());
         }
     }
 
