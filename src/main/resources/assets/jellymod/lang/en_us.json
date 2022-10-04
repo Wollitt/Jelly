@@ -5,6 +5,7 @@
   "item.jellymod.coal_dust": "Coal Dust",
   "item.jellymod.bronze_ingot": "Bronze Ingot",
   "item.jellymod.bronze_dust": "Bronze Dust",
+  "item.jellymod.tin_ingot": "Tin Ingot",
   "item.jellymod.miner_helmet": "Miner's Helmet",
   "item.jellymod.miner_chestplate": "Miner's Chestplate",
   "item.jellymod.miner_leggings": "Miner's Leggings",
@@ -12,5 +13,7 @@
   "item.jellymod.iron_dust": "Iron Dust",
 
   "block.jellymod.basic_crusher": "Basic Crusher",
-  "block.jellymod.basic_alloy_furnace": "Basic Alloy Furnace"
+  "block.jellymod.basic_alloy_furnace": "Basic Alloy Furnace",
+  "block.jellymod.tin_ore": "Tin Ore",
+  "block.jellymod.deepslate_tin_ore": "Deepslate Tin Ore"
 }
