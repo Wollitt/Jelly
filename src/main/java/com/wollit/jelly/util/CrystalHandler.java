@@ -1,2 +1,4 @@
-package com.wollit.jelly.util;public class CrystalHandler {
+package com.wollit.jelly.util;
+
+public class CrystalHandler {
 }

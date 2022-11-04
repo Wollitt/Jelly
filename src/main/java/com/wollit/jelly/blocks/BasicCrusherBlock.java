@@ -1,7 +1,7 @@
-package com.wollit.jelly.blocks.custom;
+package com.wollit.jelly.blocks;
 
-import com.wollit.jelly.blocks.entity.ModBlockEntities;
-import com.wollit.jelly.blocks.entity.custom.BasicCrusherBlockEntity;
+import com.wollit.jelly.blocks.entity.BasicCrusherBlockEntity;
+import com.wollit.jelly.setup.registration.JBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -27,8 +27,8 @@ import org.jetbrains.annotations.Nullable;
 public class BasicCrusherBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-    public BasicCrusherBlock(Properties properties) {
-        super(properties);
+    public BasicCrusherBlock() {
+        super(Properties.copy(Blocks.IRON_BLOCK).noOcclusion());
     }
 
     private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 10, 16);
@@ -101,6 +101,6 @@ public class BasicCrusherBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
-        return createTickerHelper(blockEntityType, ModBlockEntities.BASIC_CRUSHER_ENTITY.get(), BasicCrusherBlockEntity::tick);
+        return createTickerHelper(blockEntityType, JBlockEntities.BASIC_CRUSHER_BLOCK_ENTITY.get(), BasicCrusherBlockEntity::tick);
     }
 }

@@ -1,8 +1,8 @@
-package com.wollit.jelly.blocks.entity.custom;
+package com.wollit.jelly.blocks.entity;
 
-import com.wollit.jelly.blocks.entity.ModBlockEntities;
 import com.wollit.jelly.recipe.BasicAlloyFurnaceRecipe;
 import com.wollit.jelly.screen.basic_alloy_furnace.BasicAlloyFurnaceMenu;
+import com.wollit.jelly.setup.registration.JBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -18,6 +18,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -27,6 +28,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,15 +42,49 @@ public class BasicAlloyFurnaceBlockEntity extends BlockEntity implements MenuPro
             setChanged();
         }
     };
-    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+
+    private ItemStackHandler inputSlots;
+    private final LazyOptional<IItemHandler> inputSlotHolder = LazyOptional.of(() -> inputSlots);
+    private ItemStackHandler fuelSlot;
+    private final LazyOptional<IItemHandler> fuelSlotHolder = LazyOptional.of(() -> fuelSlot);
+    private ItemStackHandler outputSlot;
+    private final LazyOptional<IItemHandler> outputSlotHolder = LazyOptional.of(() -> outputSlot);
+
+    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.of(
+            () -> new CombinedInvWrapper(inputSlots, fuelSlot, outputSlot));
+
     protected final ContainerData data;
     private int progress = 0;
-    private int maxProgress = 0;
+    private int maxProgress = 188;
     private int fuelTime = 0;
     private int maxFuelTime = 0;
 
     public BasicAlloyFurnaceBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.BASIC_ALLOY_FURNACE_ENTITY.get(), blockPos, blockState);
+        super(JBlockEntities.BASIC_ALLOY_FURNACE_ENTITY.get(), blockPos, blockState);
+
+        inputSlots = new ItemStackHandler(2) {
+            @Override
+            protected void onContentsChanged(int slot) {
+                super.onContentsChanged(slot);
+                setChanged();
+            }
+        };
+
+        fuelSlot = new ItemStackHandler(1) {
+            @Override
+            protected void onContentsChanged(int slot) {
+                super.onContentsChanged(slot);
+                setChanged();
+            }
+        };
+
+        outputSlot = new ItemStackHandler(1) {
+            @Override
+            protected void onContentsChanged(int slot) {
+                super.onContentsChanged(slot);
+                setChanged();
+            }
+        };
 
         this.data = new ContainerData() {
             @Override
@@ -65,10 +101,11 @@ public class BasicAlloyFurnaceBlockEntity extends BlockEntity implements MenuPro
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case 0 -> BasicAlloyFurnaceBlockEntity.this.progress = value;
-                    case 1 -> BasicAlloyFurnaceBlockEntity.this.maxProgress = value;
-                    case 2 -> BasicAlloyFurnaceBlockEntity.this.fuelTime = value;
-                    case 3 -> BasicAlloyFurnaceBlockEntity.this.maxFuelTime = value;
+                    case 0: BasicAlloyFurnaceBlockEntity.this.progress = value; break;
+                    case 1: BasicAlloyFurnaceBlockEntity.this.maxProgress = value; break;
+                    case 2: BasicAlloyFurnaceBlockEntity.this.fuelTime = value; break;
+                    case 3: BasicAlloyFurnaceBlockEntity.this.maxFuelTime = value; break;
+
                 }
 
             }
@@ -121,6 +158,7 @@ public class BasicAlloyFurnaceBlockEntity extends BlockEntity implements MenuPro
         super.saveAdditional(tag);
     }
 
+
     @Override
     public void load(CompoundTag nbt) {
         super.load(nbt);
@@ -140,11 +178,21 @@ public class BasicAlloyFurnaceBlockEntity extends BlockEntity implements MenuPro
     }
 
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, BasicAlloyFurnaceBlockEntity blockEntity) {
+        if (isConsumingFuel(blockEntity)) {
+            blockEntity.fuelTime--;
+        }
+
         if(hasRecipe(blockEntity)) {
-            blockEntity.progress++;
-            setChanged(level, blockPos, blockState);
-            if(blockEntity.progress > blockEntity.maxProgress) {
-                craftItem(blockEntity);
+            if(hasFuelInFuelSlot(blockEntity) && !isConsumingFuel(blockEntity)) {
+                blockEntity.consumeFuel();
+                setChanged(level, blockPos, blockState);
+            }
+            if (isConsumingFuel(blockEntity)) {
+                blockEntity.progress++;
+                setChanged(level, blockPos, blockState);
+                if (blockEntity.progress > blockEntity.maxProgress) {
+                    craftItem(blockEntity);
+                }
             }
         } else {
             blockEntity.resetProgress();
@@ -160,12 +208,34 @@ public class BasicAlloyFurnaceBlockEntity extends BlockEntity implements MenuPro
         }
 
         Optional<BasicAlloyFurnaceRecipe> match = level.getRecipeManager().getRecipeFor(BasicAlloyFurnaceRecipe.Type.INSTANCE, inventory, level);
+        Optional<SmeltingRecipe> match_smelting = level.getRecipeManager().getRecipeFor(BasicAlloyFurnaceRecipe.Type.SMELTING, inventory, level);
+
 
         if (match.isPresent()) {
             entity.itemHandler.extractItem(0, 1, false);
+            entity.itemHandler.extractItem(1, 1, false);
 
-            entity.itemHandler.setStackInSlot(1, new ItemStack(match.get().getResultItem().getItem(), entity.itemHandler.getStackInSlot(1).getCount() + 1));
+            entity.itemHandler.setStackInSlot(3, new ItemStack(match.get().getResultItem().getItem(), entity.itemHandler.getStackInSlot(3).getCount() + 1));
 
+            entity.resetProgress();
+        }
+        else if (match_smelting.isPresent()) {
+            if (entity.itemHandler.getStackInSlot(0).getItem() == entity.itemHandler.getStackInSlot(1).getItem()) {
+                entity.itemHandler.extractItem(0, 1, false);
+                entity.itemHandler.extractItem(1, 1, false);
+
+                entity.itemHandler.setStackInSlot(3, new ItemStack(match_smelting.get().getResultItem().getItem(), entity.itemHandler.getStackInSlot(3).getCount() + 2));
+            }
+            else {
+                if (entity.itemHandler.getStackInSlot(0).isEmpty()) {
+                    entity.itemHandler.extractItem(1, 1, false);
+                }
+                else {
+                    entity.itemHandler.extractItem(0, 1, false);
+                }
+
+                entity.itemHandler.setStackInSlot(3, new ItemStack(match_smelting.get().getResultItem().getItem(), entity.itemHandler.getStackInSlot(3).getCount() + 1));
+            }
             entity.resetProgress();
         }
     }
@@ -178,9 +248,19 @@ public class BasicAlloyFurnaceBlockEntity extends BlockEntity implements MenuPro
         }
 
         Optional<BasicAlloyFurnaceRecipe> match = level.getRecipeManager().getRecipeFor(BasicAlloyFurnaceRecipe.Type.INSTANCE, inventory, level);
+        Optional<SmeltingRecipe> match_smelting = level.getRecipeManager().getRecipeFor(BasicAlloyFurnaceRecipe.Type.SMELTING, inventory, level);
 
-        return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
-                && canInsertItemIntoOutputSlot(inventory, match.get().getResultItem());
+        if (match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
+                && canInsertItemIntoOutputSlot(inventory, match.get().getResultItem())) {
+            return true;
+        }
+        else if (match_smelting.isPresent() && canInsertAmountIntoOutputSlot(inventory)
+                && canInsertItemIntoOutputSlot(inventory, match_smelting.get().getResultItem())) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     private static boolean hasFuel(BasicAlloyFurnaceBlockEntity entity) {
@@ -210,10 +290,10 @@ public class BasicAlloyFurnaceBlockEntity extends BlockEntity implements MenuPro
     }
 
     private static boolean canInsertItemIntoOutputSlot(SimpleContainer inventory, ItemStack output) {
-        return inventory.getItem(1).getItem() == output.getItem() || inventory.getItem(1).isEmpty();
+        return inventory.getItem(3).getItem() == output.getItem() || inventory.getItem(3).isEmpty();
     }
 
     private static boolean canInsertAmountIntoOutputSlot(SimpleContainer inventory) {
-        return inventory.getItem(1).getMaxStackSize() > inventory.getItem(1).getCount();
+        return inventory.getItem(3).getMaxStackSize() > inventory.getItem(3).getCount();
     }
 }

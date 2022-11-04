@@ -1,6 +1,6 @@
 package com.wollit.jelly.items.armor.custom;
 
-import com.wollit.jelly.items.armor.ModArmorMaterial;
+import com.wollit.jelly.items.armor.JArmorMaterial;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -18,7 +18,7 @@ public class ModArmorItem extends ArmorItem {
     @Override
     public void onArmorTick(ItemStack stack, Level world, Player player) {
         if(!world.isClientSide()) {
-            if (hasCorrectMaterial(ModArmorMaterial.MINER, player) && hasFullSuitOfArmorOn(player) && !player.hasEffect(MobEffects.DIG_SPEED)) {
+            if (hasCorrectMaterial(JArmorMaterial.MINER, player) && hasFullSuitOfArmorOn(player) && !player.hasEffect(MobEffects.DIG_SPEED)) {
                 player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 200, 1));
             }
         }

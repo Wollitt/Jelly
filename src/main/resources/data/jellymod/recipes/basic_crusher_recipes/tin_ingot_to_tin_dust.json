@@ -1,0 +1,11 @@
+{
+  "type": "jellymod:basic_crusher",
+  "ingredients": [
+    {
+      "item": "jellymod:tin_ingot"
+    }
+  ],
+  "output": {
+    "item": "jellymod:tin_dust"
+  }
+}

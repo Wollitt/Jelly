@@ -1,12 +1,14 @@
 {
-  "type": "jellymod:basic_steel_furnace",
+  "type": "jellymod:basic_alloy_furnace",
   "ingredients": [
     {
-      "item": "minecraft:iron_ingot",
-      "item": "minecraft:coal"
+      "item": "jellymod:iron_dust"
+    },
+    {
+      "item": "jellymod:coal_dust"
     }
   ],
   "output": {
-    "item": "jellymod:coal_dust"
+    "item": "jellymod:steel_ingot"
   }
 }

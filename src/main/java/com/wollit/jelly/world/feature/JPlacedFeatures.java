@@ -6,8 +6,8 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
-public class ModPlacedFeatures {
+public class JPlacedFeatures {
     public static final Holder<PlacedFeature> TIN_ORE_PLACED = PlacementUtils.register("tin_ore_placed",
-            ModConfiguredFeatures.TIN_ORE, ModOrePlacement.commonOrePlacement(7, // Veins per chunk
+            JConfiguredFeatures.TIN_ORE, JOrePlacement.commonOrePlacement(7, // Veins per chunk
                     HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
 }

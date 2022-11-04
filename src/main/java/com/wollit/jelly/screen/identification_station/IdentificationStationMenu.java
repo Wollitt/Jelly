@@ -1,6 +1,6 @@
-package com.wollit.jelly.screen.basic_crusher;
+package com.wollit.jelly.screen.identification_station;
 
-import com.wollit.jelly.blocks.entity.BasicCrusherBlockEntity;
+import com.wollit.jelly.blocks.entity.IdentificationStationBlockEntity;
 import com.wollit.jelly.setup.registration.JBlockEntities;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -12,43 +12,28 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class BasicCrusherMenu extends AbstractContainerMenu {
-    private final BasicCrusherBlockEntity blockEntity;
+public class IdentificationStationMenu extends AbstractContainerMenu {
+    public final IdentificationStationBlockEntity blockEntity;
     private final Level level;
-    private final ContainerData data;
 
-    public BasicCrusherMenu(int containerId, Inventory inventory, FriendlyByteBuf extraData) {
-        this(containerId, inventory, inventory.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
+
+    public IdentificationStationMenu(int containerId, Inventory inventory, FriendlyByteBuf extraData) {
+        this(containerId, inventory, inventory.player.level.getBlockEntity(extraData.readBlockPos()));
     }
 
-    public BasicCrusherMenu(int containerId, Inventory inventory, BlockEntity blockEntity, ContainerData data) {
-        super(JBlockEntities.BASIC_CRUSHER_MENU.get(), containerId);
-        checkContainerSize(inventory, 2);
-        this.blockEntity = (BasicCrusherBlockEntity) blockEntity;
+    public IdentificationStationMenu(int containerId, Inventory inventory, BlockEntity blockEntity) {
+        super(JBlockEntities.IDENTIFICATION_STATION_MENU.get(), containerId);
+        checkContainerSize(inventory, 1);
+        this.blockEntity = (IdentificationStationBlockEntity) blockEntity;
         this.level = inventory.player.level;
-        this.data = data;
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
 
         this.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
             this.addSlot(new SlotItemHandler(handler, 0, 80, 10));
-            this.addSlot(new SlotItemHandler(handler, 1, 80, 60));
         });
 
-        addDataSlots(data);
-    }
-
-    public boolean isCrafting() {
-        return data.get(0) > 0;
-    }
-
-    public int getScaledProgress() {
-        int progress = this.data.get(0);
-        int maxProgress = this.data.get(1);
-        int progressArrowSize = 25;
-
-        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
@@ -67,7 +52,7 @@ public class BasicCrusherMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 2;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 1;  // must be the number of slots you have!
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
@@ -104,7 +89,7 @@ public class BasicCrusherMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, JBlockEntities.BASIC_CRUSHER.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, JBlockEntities.IDENTIFICATION_STATION.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

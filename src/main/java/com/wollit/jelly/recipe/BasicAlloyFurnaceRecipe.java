@@ -26,7 +26,10 @@ public class BasicAlloyFurnaceRecipe implements Recipe<SimpleContainer> {
 
     @Override
     public boolean matches(SimpleContainer container, Level level) {
-        return recipeItems.get(0).test(container.getItem(0));
+        if (recipeItems.get(0).test(container.getItem(0))) {
+            return recipeItems.get(1).test(container.getItem(1));
+        }
+        return false;
     }
 
     @Override
@@ -62,19 +65,19 @@ public class BasicAlloyFurnaceRecipe implements Recipe<SimpleContainer> {
     public static class Type implements RecipeType<BasicAlloyFurnaceRecipe> {
         private Type() {}
         public static BasicAlloyFurnaceRecipe.Type INSTANCE = new BasicAlloyFurnaceRecipe.Type();
-        public static final String ID = "basic_steel_furnace";
+        public static final String ID = "basic_alloy_furnace";
     }
 
     public static class Serializer implements RecipeSerializer<BasicAlloyFurnaceRecipe> {
         public static final BasicAlloyFurnaceRecipe.Serializer INSTANCE = new Serializer();
-        public static final ResourceLocation ID = new ResourceLocation(JellyMod.MOD_ID, "basic_steel_furnace");
+        public static final ResourceLocation ID = new ResourceLocation(JellyMod.MOD_ID, "basic_alloy_furnace");
 
         @Override
         public BasicAlloyFurnaceRecipe fromJson(ResourceLocation id, JsonObject json) {
             ItemStack output = ShapedRecipe. itemStackFromJson(GsonHelper.getAsJsonObject(json, "output"));
 
             JsonArray ingredients = GsonHelper.getAsJsonArray(json, "ingredients");
-            NonNullList<Ingredient> inputs = NonNullList.withSize(1, Ingredient.EMPTY);
+            NonNullList<Ingredient> inputs = NonNullList.withSize(2, Ingredient.EMPTY);
             for (int i = 0; i < inputs.size(); ++i) {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }

@@ -6,14 +6,17 @@
   "item.jellymod.bronze_ingot": "Bronze Ingot",
   "item.jellymod.bronze_dust": "Bronze Dust",
   "item.jellymod.tin_ingot": "Tin Ingot",
+  "item.jellymod.tin_dust": "Tin Dust",
   "item.jellymod.miner_helmet": "Miner's Helmet",
   "item.jellymod.miner_chestplate": "Miner's Chestplate",
   "item.jellymod.miner_leggings": "Miner's Leggings",
   "item.jellymod.miner_boots": "Miner's Boots",
   "item.jellymod.iron_dust": "Iron Dust",
+  "item.jellymod.fairy_sword": "Fairy Sword",
 
   "block.jellymod.basic_crusher": "Basic Crusher",
   "block.jellymod.basic_alloy_furnace": "Basic Alloy Furnace",
+  "block.jellymod.identification_station": "Identification Station",
   "block.jellymod.tin_ore": "Tin Ore",
   "block.jellymod.deepslate_tin_ore": "Deepslate Tin Ore"
 }

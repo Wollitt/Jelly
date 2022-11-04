@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model":  "jellymod:block/identification_station"},
+    "facing=east": { "model":  "jellymod:block/identification_station", "y":  90},
+    "facing=south": { "model":  "jellymod:block/identification_station", "y":  180},
+    "facing=west": { "model":  "jellymod:block/identification_station", "y":  270}
+  }
+}

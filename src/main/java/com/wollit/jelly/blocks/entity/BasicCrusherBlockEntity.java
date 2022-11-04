@@ -1,8 +1,8 @@
-package com.wollit.jelly.blocks.entity.custom;
+package com.wollit.jelly.blocks.entity;
 
-import com.wollit.jelly.blocks.entity.ModBlockEntities;
 import com.wollit.jelly.recipe.BasicCrusherRecipe;
 import com.wollit.jelly.screen.basic_crusher.BasicCrusherMenu;
+import com.wollit.jelly.setup.registration.JBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -45,7 +45,7 @@ public class BasicCrusherBlockEntity extends BlockEntity implements MenuProvider
 
 
     public BasicCrusherBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.BASIC_CRUSHER_ENTITY.get(), blockPos, blockState);
+        super(JBlockEntities.BASIC_CRUSHER_BLOCK_ENTITY.get(), blockPos, blockState);
 
         this.data = new ContainerData() {
             @Override
@@ -161,7 +161,7 @@ public class BasicCrusherBlockEntity extends BlockEntity implements MenuProvider
 
     private static boolean hasRecipe(BasicCrusherBlockEntity entity) {
         Level level = entity.level;
-        SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
+            SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
         for (int i = 0; i < entity.itemHandler.getSlots(); ++i) {
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }

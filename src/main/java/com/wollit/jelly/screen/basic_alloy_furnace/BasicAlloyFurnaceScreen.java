@@ -18,6 +18,7 @@ public class BasicAlloyFurnaceScreen extends AbstractContainerScreen<BasicAlloyF
         super(menu, inventory, component);
     }
 
+
     @Override
     protected void renderBg(@NotNull PoseStack poseStack, float partialTick, int mouseX, int mouseY) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);

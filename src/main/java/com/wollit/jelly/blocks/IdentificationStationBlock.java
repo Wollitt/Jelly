@@ -1,42 +1,32 @@
-package com.wollit.jelly.blocks.custom;
+package com.wollit.jelly.blocks;
 
-import com.wollit.jelly.blocks.entity.ModBlockEntities;
-import com.wollit.jelly.blocks.entity.custom.BasicAlloyFurnaceBlockEntity;
+import com.wollit.jelly.blocks.entity.IdentificationStationBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
-public class BasicAlloyFurnaceBlock extends BaseEntityBlock {
+public class IdentificationStationBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-    public BasicAlloyFurnaceBlock(Properties properties) {
-        super(properties);
+    public IdentificationStationBlock() {
+        super(Properties.copy(Blocks.IRON_BLOCK).noOcclusion());
     }
 
     private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 16, 16);
-
-    @Override
-    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext context) {
-        return SHAPE;
-    }
 
     /* FACING */
 
@@ -63,7 +53,6 @@ public class BasicAlloyFurnaceBlock extends BaseEntityBlock {
 
     /* BLOCK ENTITY */
 
-    @Override
     public RenderShape getRenderShape(BlockState blockState) {
         return RenderShape.MODEL;
     }
@@ -72,8 +61,8 @@ public class BasicAlloyFurnaceBlock extends BaseEntityBlock {
     public void onRemove(BlockState blockState, Level level, BlockPos blockPos, BlockState blockStateNew, boolean pIsMoving) {
         if (blockState.getBlock() != blockStateNew.getBlock()) {
             BlockEntity blockEntity = level.getBlockEntity(blockPos);
-            if (blockEntity instanceof BasicAlloyFurnaceBlockEntity) {
-                ((BasicAlloyFurnaceBlockEntity)blockEntity).drops();
+            if (blockEntity instanceof IdentificationStationBlockEntity) {
+                ((IdentificationStationBlockEntity)blockEntity).drops();
             }
         }
         super.onRemove(blockState, level, blockPos, blockStateNew, pIsMoving);
@@ -83,8 +72,8 @@ public class BasicAlloyFurnaceBlock extends BaseEntityBlock {
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand hand, BlockHitResult hit) {
         if(!level.isClientSide()) {
             BlockEntity blockEntity = level.getBlockEntity(blockPos);
-            if(blockEntity instanceof BasicAlloyFurnaceBlockEntity) {
-                NetworkHooks.openGui(((ServerPlayer) player), (BasicAlloyFurnaceBlockEntity)blockEntity, blockPos);
+            if(blockEntity instanceof IdentificationStationBlockEntity) {
+                NetworkHooks.openGui(((ServerPlayer) player), (IdentificationStationBlockEntity)blockEntity, blockPos);
             } else {
                 throw new IllegalStateException("Our container provider is missing");
             }
@@ -95,14 +84,6 @@ public class BasicAlloyFurnaceBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new BasicAlloyFurnaceBlockEntity(blockPos, blockState);
+        return new IdentificationStationBlockEntity(blockPos, blockState);
     }
-
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
-        return createTickerHelper(blockEntityType, ModBlockEntities.BASIC_ALLOY_FURNACE_ENTITY.get(), BasicAlloyFurnaceBlockEntity::tick);
-    }
-
-
 }

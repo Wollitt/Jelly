@@ -1,8 +1,7 @@
 package com.wollit.jelly.screen.basic_alloy_furnace;
 
-import com.wollit.jelly.blocks.ModBlocks;
-import com.wollit.jelly.blocks.entity.custom.BasicAlloyFurnaceBlockEntity;
-import com.wollit.jelly.screen.ModMenuTypes;
+import com.wollit.jelly.blocks.entity.BasicAlloyFurnaceBlockEntity;
+import com.wollit.jelly.setup.registration.JBlockEntities;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -23,7 +22,7 @@ public class BasicAlloyFurnaceMenu extends AbstractContainerMenu {
     }
 
     public BasicAlloyFurnaceMenu(int containerID, Inventory inventory, BlockEntity blockEntity, ContainerData data) {
-        super(ModMenuTypes.BASIC_ALLOY_FURNACE_MENU.get(), containerID);
+        super(JBlockEntities.BASIC_ALLOY_FURNACE_MENU.get(), containerID);
         checkContainerSize(inventory, 4);
         this.blockEntity = (BasicAlloyFurnaceBlockEntity) blockEntity;
         this.level = inventory.player.level;
@@ -33,10 +32,10 @@ public class BasicAlloyFurnaceMenu extends AbstractContainerMenu {
         addPlayerHotbar(inventory);
 
         this.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
-            this.addSlot(new SlotItemHandler(handler, 0, 57, 18));
-            this.addSlot(new SlotItemHandler(handler, 1, 103, 18));
-            this.addSlot(new SlotItemHandler(handler, 2, 152, 60));
-            this.addSlot(new SlotItemHandler(handler, 3, 80, 60));
+            this.addSlot(new SlotItemHandler(handler, 0, 57, 18)); // input 1
+            this.addSlot(new SlotItemHandler(handler, 1, 103, 18)); // input 2
+            this.addSlot(new SlotItemHandler(handler, 2, 152, 60)); // fuel
+            this.addSlot(new SlotItemHandler(handler, 3, 80, 60)); // output
         });
 
         addDataSlots(data);
@@ -107,7 +106,7 @@ public class BasicAlloyFurnaceMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, ModBlocks.BASIC_ALLOY_FURNACE.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, JBlockEntities.BASIC_ALLOY_FURNACE.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {
