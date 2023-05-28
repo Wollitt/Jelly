@@ -1,9 +1,0 @@
-"type": "jellymod:basic_crusher",
-"ingredients": [
-{
-"item": "jellymod:bronze_ingot"
-}
-],
-"output": {
-"item": "jellymod:bronze_dust"
-}

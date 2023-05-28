@@ -1,8 +1,0 @@
-{
-  "variants": {
-    "facing=north": { "model":  "jellymod:block/basic_crusher"},
-    "facing=east": { "model":  "jellymod:block/basic_crusher", "y":  90},
-    "facing=south": { "model":  "jellymod:block/basic_crusher", "y":  180},
-    "facing=west": { "model":  "jellymod:block/basic_crusher", "y":  270}
-  }
-}
