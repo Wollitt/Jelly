@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "order": 1,
+  "enabled": true,
+  "classes": [
+    "jellymod:archer",
+    "jellymod:warrior"
+  ]
+}

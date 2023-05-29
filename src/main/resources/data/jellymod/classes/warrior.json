@@ -1,0 +1,8 @@
+{
+  "powers": [
+    "jellymod:bow_damage"
+  ],
+  "icon": "minecaft:iron_sword",
+  "order": 1,
+  "impact": 0
+}
