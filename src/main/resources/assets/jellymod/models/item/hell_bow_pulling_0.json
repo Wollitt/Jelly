@@ -1,0 +1,6 @@
+{
+  "parent": "jellymod:item/hell_bow",
+  "textures": {
+    "layer0": "jellymod:item/hell_bow_pulling_0"
+  }
+}
