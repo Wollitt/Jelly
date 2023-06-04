@@ -1,15 +1,15 @@
-package com.wollit.jellymod.capability.classes.range;
+package com.wollit.jellymod.capability.classes.range.sniper;
 
 import com.wollit.jellymod.capability.classes.AbstractClassCapability;
-import com.wollit.jellymod.capability.classes.AbstractClassCapabilityProvider;
+import com.wollit.jellymod.capability.classes.range.ArcherCapabilityProvider;
 import org.jetbrains.annotations.NotNull;
 
-public class RangeCapabilityProvider extends AbstractClassCapabilityProvider {
+public class SniperClassProvider extends ArcherCapabilityProvider {
 
     @Override
     public @NotNull AbstractClassCapability createClass() {
         if (getPlayerClass() == null) {
-            setPlayerClass(new RangeClassCapability());
+            setPlayerClass(new SniperClassCapability());
         }
 
         return this.getPlayerClass();

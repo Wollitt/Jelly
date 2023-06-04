@@ -52,3 +52,7 @@ public class JellyMod {
         }
     }
 }
+
+
+//Set movement speed
+//player.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(player.getAbilities().getWalkingSpeed() * ((SniperClassCapability) playerClass).getMovementSpeedMultiplayer());

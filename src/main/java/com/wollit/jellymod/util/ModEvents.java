@@ -2,8 +2,7 @@ package com.wollit.jellymod.util;
 
 import com.wollit.jellymod.JellyMod;
 import com.wollit.jellymod.capability.classes.AbstractClassCapabilityProvider;
-import com.wollit.jellymod.capability.classes.range.RangeCapabilityProvider;
-import com.wollit.jellymod.capability.classes.warrior.WarriorCapabilityProvider;
+import com.wollit.jellymod.capability.classes.range.sniper.SniperClassProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -19,7 +18,7 @@ public class ModEvents {
     public static void onAttachCapabilitiesPlayer(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player) {
             if (!event.getObject().getCapability(AbstractClassCapabilityProvider.CLASS).isPresent()) {
-                event.addCapability(new ResourceLocation(JellyMod.MOD_ID, "class"), new WarriorCapabilityProvider());
+                event.addCapability(new ResourceLocation(JellyMod.MOD_ID, "class"), new SniperClassProvider());
             }
         }
     }

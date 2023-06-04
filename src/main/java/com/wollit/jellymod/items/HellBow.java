@@ -1,6 +1,6 @@
 package com.wollit.jellymod.items;
 
-import com.wollit.jellymod.capability.classes.range.RangeClassCapability;
+import com.wollit.jellymod.capability.classes.range.ArcherClassCapability;
 import com.wollit.jellymod.capability.classes.warrior.WarriorCapabilityProvider;
 import com.wollit.jellymod.capability.classes.warrior.WarriorClassCapability;
 import net.minecraft.network.chat.Component;
@@ -51,12 +51,8 @@ public class HellBow extends BowItem {
                         abstractarrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, f * 3.0F, 1.0F);
 
                         player.getCapability(WarriorCapabilityProvider.CLASS).ifPresent(playerClass -> {
-                            if (playerClass instanceof WarriorClassCapability) {
-                                player.sendSystemMessage(Component.literal("Dmg multiplayer on warrior is " + ((WarriorClassCapability) playerClass).getSwordDmg()));
-                            }
-
-                            if (playerClass instanceof RangeClassCapability) {
-                                player.sendSystemMessage(Component.literal("Dmg multiplayer on ranger is " + ((RangeClassCapability) playerClass).getRangeDmg()));
+                            if (playerClass instanceof ArcherClassCapability archer) {
+                                player.sendSystemMessage(Component.literal("Dmg multiplayer on ranger is " + archer.getRangeDmg()));
                             }
                         });
 
