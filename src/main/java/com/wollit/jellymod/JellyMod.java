@@ -1,53 +1,50 @@
 package com.wollit.jellymod;
 
-import com.mojang.logging.LogUtils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
-import net.minecraftforge.api.distmarker.Dist;
+import com.wollit.jellymod.items.ModItems;
+import com.wollit.jellymod.network.ModNetwork;
+import com.wollit.jellymod.util.ModCreativeModeTabs;
+import com.wollit.jellymod.util.ModEvents;
+import com.wollit.jellymod.util.ModItemProperties;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
-import org.slf4j.Logger;
 
 @Mod(com.wollit.jellymod.JellyMod.MOD_ID)
 public class JellyMod {
 
     public static final String MOD_ID = "jellymod";
-    private static final Logger LOGGER = LogUtils.getLogger();
 
     public JellyMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        modEventBus.addListener(this::commonSetup);
+        ModItems.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
 
         modEventBus.addListener(this::addCreative);
+        modEventBus.addListener(this::clientSetup);
+        modEventBus.addListener(this::commonSetup);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+        ModNetwork.register();
     }
 
     private void addCreative(CreativeModeTabEvent.BuildContents event) {
+        if (event.getTab() == ModCreativeModeTabs.JELLY_MOD_TAB) {
+            event.accept(ModItems.HELL_BOW);
+        }
     }
 
+    private void clientSetup(final FMLClientSetupEvent event) {
+        ModItemProperties.addCustomItemProperties();
+    }
 
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-    @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
@@ -55,3 +52,7 @@ public class JellyMod {
         }
     }
 }
+
+
+//Set movement speed
+//player.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(player.getAbilities().getWalkingSpeed() * ((SniperClassCapability) playerClass).getMovementSpeedMultiplayer());
