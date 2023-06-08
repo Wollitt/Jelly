@@ -3,7 +3,6 @@ package com.wollit.jellymod;
 import com.wollit.jellymod.items.ModItems;
 import com.wollit.jellymod.network.ModNetwork;
 import com.wollit.jellymod.util.ModCreativeModeTabs;
-import com.wollit.jellymod.util.ModEvents;
 import com.wollit.jellymod.util.ModItemProperties;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
@@ -37,6 +36,10 @@ public class JellyMod {
     private void addCreative(CreativeModeTabEvent.BuildContents event) {
         if (event.getTab() == ModCreativeModeTabs.JELLY_MOD_TAB) {
             event.accept(ModItems.HELL_BOW);
+            event.accept(ModItems.MINER_HELMET);
+            event.accept(ModItems.MINER_CHESTPLATE);
+            event.accept(ModItems.MINER_LEGGINGS);
+            event.accept(ModItems.MINER_BOOTS);
         }
     }
 
