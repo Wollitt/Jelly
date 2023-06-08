@@ -1,5 +1,12 @@
 {
   "item.jellymod.hell_bow": "Hell Bow",
+  "item.jellymod.miner_helmet": "Miner Helmet",
+  "item.jellymod.miner_chestplate": "Miner Chestplate",
+  "item.jellymod.miner_leggings": "Miner Leggings",
+  "item.jellymod.miner_boots": "Miner Boots",
 
-  "creativemodetab.jelly_mod_tab": "Jelly Mod"
+  "creativemodetab.jelly_mod_tab": "Jelly Mod",
+
+  "key.category.jellymod.jelly": "Jelly Mod",
+  "key.jellymod.use_ability": "Use class ability"
 }
