@@ -6,25 +6,40 @@ import net.minecraftforge.common.capabilities.AutoRegisterCapability;
 
 @AutoRegisterCapability
 public class WarriorClassCapability extends AbstractClassCapability {
-    private Float swordDamageMultiplayer = 1.25F;
-    private final String tag = "sword_damage_multiplayer";
+    private Float melleDamageMultiplayer = 1.25F;
+    private final String WARRIOR_DAMAGE_MULTIPLAYER_TAG = "warrior_damage_multiplayer";
 
-    public Float getSwordDmg() {
-        return swordDamageMultiplayer;
+    public WarriorClassCapability() {}
+
+    public WarriorClassCapability(Float swordDamageMultiplayer) {
+        this.melleDamageMultiplayer = swordDamageMultiplayer;
+    }
+
+    public String getMelleDamageTag() {
+        return WARRIOR_DAMAGE_MULTIPLAYER_TAG;
+    }
+
+    public Float getMelleDmg() {
+        return melleDamageMultiplayer;
+    }
+
+    @Override
+    public <T> void useClassAbility(T object) {
+
     }
 
     @Override
     public <T> void copyFrom(T object) {
-        this.swordDamageMultiplayer = (Float) object;
+        this.melleDamageMultiplayer = (Float) object;
     }
 
     @Override
     public void saveNbtData(CompoundTag nbt) {
-        nbt.putFloat(tag, swordDamageMultiplayer);
+        nbt.putFloat(WARRIOR_DAMAGE_MULTIPLAYER_TAG, melleDamageMultiplayer);
     }
 
     @Override
     public void loadNbtData(CompoundTag nbt) {
-        swordDamageMultiplayer = nbt.getFloat(tag);
+        melleDamageMultiplayer = nbt.getFloat(WARRIOR_DAMAGE_MULTIPLAYER_TAG);
     }
 }

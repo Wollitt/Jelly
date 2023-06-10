@@ -1,7 +1,7 @@
-package com.wollit.jellymod.capability.classes.range.sniper;
+package com.wollit.jellymod.capability.classes.archer.sniper;
 
 import com.wollit.jellymod.capability.classes.AbstractClassCapability;
-import com.wollit.jellymod.capability.classes.range.ArcherCapabilityProvider;
+import com.wollit.jellymod.capability.classes.archer.ArcherCapabilityProvider;
 import org.jetbrains.annotations.NotNull;
 
 public class SniperClassProvider extends ArcherCapabilityProvider {

@@ -1,4 +1,4 @@
-package com.wollit.jellymod.capability.classes.range;
+package com.wollit.jellymod.capability.classes.archer;
 
 import com.wollit.jellymod.capability.classes.AbstractClassCapability;
 import com.wollit.jellymod.capability.classes.AbstractClassCapabilityProvider;
