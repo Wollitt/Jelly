@@ -4,6 +4,8 @@ import com.wollit.jellymod.JellyMod;
 import com.wollit.jellymod.items.armor.ModArmorItem;
 import com.wollit.jellymod.items.armor.ModArmorMaterial;
 import com.wollit.jellymod.items.weapons.HellBow;
+import com.wollit.jellymod.items.weapons.ModItemTier;
+import com.wollit.jellymod.items.weapons.custom.BrugSword;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -29,6 +31,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> MINER_BOOTS = ITEMS.register("miner_boots",
             () -> new ModArmorItem(ModArmorMaterial.MINER, ArmorItem.Type.BOOTS, new Item.Properties()));
+
+    public static final RegistryObject<Item> BRUG_SWORD = ITEMS.register("brug_sword",
+            () -> new BrugSword(ModItemTier.BRUG, 3, -2.4F, new Item.Properties()));
 
 
     public static void register(IEventBus eventBus) {

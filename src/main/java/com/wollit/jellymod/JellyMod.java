@@ -40,6 +40,7 @@ public class JellyMod {
             event.accept(ModItems.MINER_CHESTPLATE);
             event.accept(ModItems.MINER_LEGGINGS);
             event.accept(ModItems.MINER_BOOTS);
+            event.accept(ModItems.BRUG_SWORD);
         }
     }
 
