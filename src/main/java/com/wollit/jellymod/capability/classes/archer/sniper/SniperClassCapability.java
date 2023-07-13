@@ -1,16 +1,16 @@
-package com.wollit.jellymod.capability.classes.range.sniper;
+package com.wollit.jellymod.capability.classes.archer.sniper;
 
-import com.wollit.jellymod.capability.classes.range.ArcherClassCapability;
+import com.wollit.jellymod.capability.classes.archer.ArcherClassCapability;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.capabilities.AutoRegisterCapability;
 
 @AutoRegisterCapability
 public class SniperClassCapability extends ArcherClassCapability {
     private Float movementSpeedMultiplayer = 1.5F;
-    private final String tag = "sniper_movement_speed_multiplayer";
+    private final String SNIPER_MOVEMENT_SPEED_TAG = "sniper_movement_speed_multiplayer";
 
     public SniperClassCapability() {
-        super(1.4F, "sniper_damage_multiplayer");
+        super(2.0F);
     }
 
     public Float getMovementSpeedMultiplayer() {
@@ -30,13 +30,13 @@ public class SniperClassCapability extends ArcherClassCapability {
 
     @Override
     public void saveNbtData(CompoundTag nbt) {
-        nbt.putFloat(getTag(), getRangeDmg());
-        nbt.putFloat(tag, movementSpeedMultiplayer);
+        nbt.putFloat(getRangeDamageTag(), getRangeDmg());
+        nbt.putFloat(SNIPER_MOVEMENT_SPEED_TAG, movementSpeedMultiplayer);
     }
 
     @Override
     public void loadNbtData(CompoundTag nbt) {
-        setRangeDmg(nbt.getFloat(getTag()));
-        setMovementSpeedMultiplayer(nbt.getFloat(tag));
+        setRangeDmg(nbt.getFloat(getRangeDamageTag()));
+        setMovementSpeedMultiplayer(nbt.getFloat(SNIPER_MOVEMENT_SPEED_TAG));
     }
 }

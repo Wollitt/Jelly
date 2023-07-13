@@ -1,4 +1,4 @@
-package com.wollit.jellymod.capability.classes.range;
+package com.wollit.jellymod.capability.classes.archer;
 
 import com.wollit.jellymod.capability.classes.AbstractClassCapability;
 import net.minecraft.nbt.CompoundTag;
@@ -7,14 +7,16 @@ import net.minecraftforge.common.capabilities.AutoRegisterCapability;
 @AutoRegisterCapability
 public class ArcherClassCapability extends AbstractClassCapability {
     private Float rangeDamageMultiplayer = 1.25F;
+    private final String ARCHER_DAMAGE_MULTIPLAYER_TAG = "archer_damage_multiplayer";
 
-    public ArcherClassCapability() {
-        this.setTag("range_damage_multiplayer");
+    public ArcherClassCapability() {}
+
+    public ArcherClassCapability(Float rangeDamageMultiplayer) {
+        this.rangeDamageMultiplayer = rangeDamageMultiplayer;
     }
 
-    public ArcherClassCapability(Float rangeDamageMultiplayer, String tag) {
-        this.rangeDamageMultiplayer = rangeDamageMultiplayer;
-        this.setTag(tag);
+    public String getRangeDamageTag() {
+        return ARCHER_DAMAGE_MULTIPLAYER_TAG;
     }
 
     public Float getRangeDmg() {
@@ -26,6 +28,11 @@ public class ArcherClassCapability extends AbstractClassCapability {
     }
 
     @Override
+    public <T> void useClassAbility(T object) {
+
+    }
+
+    @Override
     public <T> void copyFrom(T object) {
         ArcherClassCapability playerClass = (ArcherClassCapability) object;
         this.setRangeDmg(playerClass.getRangeDmg());
@@ -33,11 +40,11 @@ public class ArcherClassCapability extends AbstractClassCapability {
 
     @Override
     public void saveNbtData(CompoundTag nbt) {
-        nbt.putFloat(getTag(), rangeDamageMultiplayer);
+        nbt.putFloat(ARCHER_DAMAGE_MULTIPLAYER_TAG, rangeDamageMultiplayer);
     }
 
     @Override
     public void loadNbtData(CompoundTag nbt) {
-        rangeDamageMultiplayer = nbt.getFloat(getTag());
+        rangeDamageMultiplayer = nbt.getFloat(ARCHER_DAMAGE_MULTIPLAYER_TAG);
     }
 }
