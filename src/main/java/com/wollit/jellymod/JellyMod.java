@@ -49,6 +49,10 @@ public class JellyMod {
             event.accept(ModItems.MINER_LEGGINGS);
             event.accept(ModItems.MINER_BOOTS);
             event.accept(ModItems.BRUG_SWORD);
+            event.accept(ModItems.CRYSTAL_OF_VITALITY);
+            event.accept(ModItems.CRYSTAL_OF_HASTE);
+            event.accept(ModItems.CRYSTAL_OF_EVASION);
+
             event.accept(ModBlocks.IDENTIFICATION_TABLE);
         }
     }

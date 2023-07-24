@@ -35,6 +35,14 @@ public class ModItems {
     public static final RegistryObject<Item> BRUG_SWORD = ITEMS.register("brug_sword",
             () -> new BrugSword(ModItemTier.BRUG, 3, -2.4F, new Item.Properties()));
 
+    public static final RegistryObject<Item> CRYSTAL_OF_VITALITY = ITEMS.register("crystal_of_vitality",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> CRYSTAL_OF_HASTE = ITEMS.register("crystal_of_haste",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> CRYSTAL_OF_EVASION = ITEMS.register("crystal_of_evasion",
+            () -> new Item(new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
