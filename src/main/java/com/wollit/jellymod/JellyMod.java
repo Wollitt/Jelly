@@ -1,9 +1,14 @@
 package com.wollit.jellymod;
 
+import com.wollit.jellymod.blocks.ModBlockEntities;
+import com.wollit.jellymod.blocks.ModBlocks;
+import com.wollit.jellymod.blocks.ModMenuTypes;
+import com.wollit.jellymod.blocks.identification_table.IdentificationTableScreen;
 import com.wollit.jellymod.items.ModItems;
 import com.wollit.jellymod.network.ModNetwork;
 import com.wollit.jellymod.util.ModCreativeModeTabs;
 import com.wollit.jellymod.util.ModItemProperties;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -22,6 +27,9 @@ public class JellyMod {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
+        ModMenuTypes.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
 
         modEventBus.addListener(this::addCreative);
@@ -41,6 +49,7 @@ public class JellyMod {
             event.accept(ModItems.MINER_LEGGINGS);
             event.accept(ModItems.MINER_BOOTS);
             event.accept(ModItems.BRUG_SWORD);
+            event.accept(ModBlocks.IDENTIFICATION_TABLE);
         }
     }
 
@@ -52,7 +61,7 @@ public class JellyMod {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-
+            MenuScreens.register(ModMenuTypes.IDENTIFICATION_TABLE_MENU.get(), IdentificationTableScreen::new);
         }
     }
 }

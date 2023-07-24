@@ -13,11 +13,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class AbstractMagicSword extends SwordItem {
+abstract public class AbstractMagicSword extends SwordItem {
 
-    private final String CRYSTAL_SLOTS_TAG = "crystals_slog_tag";
-    private final String RUNE_SLOTS_TAG = "rune_slots_tag";
+    private final String CRYSTAL_SLOTS_TAG = "crystals_slots_tag";
     private final String IDENTIFICATION_STATUS_TAG = "identification_status_tag";
+    private final String RUNE_SLOTS_TAG = "rune_slots_tag";
 
     public AbstractMagicSword(Tier toolMaterial, int damage, float attackSpeed, Properties properties) {
         super(toolMaterial, damage, attackSpeed, properties);
@@ -26,13 +26,32 @@ public class AbstractMagicSword extends SwordItem {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-        itemStack.getOrCreateTag().putInt(CRYSTAL_SLOTS_TAG,3);
-        itemStack.getOrCreateTag().putBoolean(IDENTIFICATION_STATUS_TAG, false);
         if (Screen.hasShiftDown()) {
-            if (itemStack.getOrCreateTag().getBoolean(IDENTIFICATION_STATUS_TAG)) {
-                tooltip.add(Component.literal("§7Crystals: " + itemStack.getOrCreateTag().getInt(CRYSTAL_SLOTS_TAG)));
-            } else {
+            if (!itemStack.getOrCreateTag().getBoolean(IDENTIFICATION_STATUS_TAG)) {
                 tooltip.add(Component.literal("§4 UNIDENTIFIED"));
+            } else {
+                switch (itemStack.getOrCreateTag().getInt(CRYSTAL_SLOTS_TAG)) {
+                    case 0:
+                        tooltip.add(Component.literal("§7Quality: §2COMMON"));
+                        tooltip.add(Component.literal("§7Crystals: " + itemStack.getOrCreateTag().getInt(CRYSTAL_SLOTS_TAG)));
+                        break;
+                    case 1:
+                        tooltip.add(Component.literal("§7Quality: §9RARE"));
+                        tooltip.add(Component.literal("§7Crystals: " + itemStack.getOrCreateTag().getInt(CRYSTAL_SLOTS_TAG)));
+                        break;
+                    case 2:
+                        tooltip.add(Component.literal("§7Quality: §dEPIC"));
+                        tooltip.add(Component.literal("§7Crystals: " + itemStack.getOrCreateTag().getInt(CRYSTAL_SLOTS_TAG)));
+                        break;
+                    case 3:
+                        tooltip.add(Component.literal("§7Quality: §6LEGENDARY"));
+                        tooltip.add(Component.literal("§7Crystals: " + itemStack.getOrCreateTag().getInt(CRYSTAL_SLOTS_TAG)));
+                        break;
+                    case 4:
+                        tooltip.add(Component.literal("§7Quality: §bLUMINOUS"));
+                        tooltip.add(Component.literal("§7Crystals: " + itemStack.getOrCreateTag().getInt(CRYSTAL_SLOTS_TAG)));
+                        break;
+                }
             }
         }
     }

@@ -31,6 +31,12 @@ public class ModNetwork {
                 .encoder(PacketUsePaladinClassAbilityC2S::toBytes)
                 .consumerMainThread(PacketUsePaladinClassAbilityC2S::handle)
                 .add();
+
+        net.messageBuilder(PacketIdentifyItemC2S.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(PacketIdentifyItemC2S::new)
+                .encoder(PacketIdentifyItemC2S::toBytes)
+                .consumerMainThread(PacketIdentifyItemC2S::handle)
+                .add();
     }
 
     public static <MSG> void sendToServer(MSG message) {
