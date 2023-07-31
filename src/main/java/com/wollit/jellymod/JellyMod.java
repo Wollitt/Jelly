@@ -3,6 +3,7 @@ package com.wollit.jellymod;
 import com.wollit.jellymod.blocks.ModBlockEntities;
 import com.wollit.jellymod.blocks.ModBlocks;
 import com.wollit.jellymod.blocks.ModMenuTypes;
+import com.wollit.jellymod.blocks.gear_amplifier.GearAmplifierScreen;
 import com.wollit.jellymod.blocks.identification_table.IdentificationTableScreen;
 import com.wollit.jellymod.items.ModItems;
 import com.wollit.jellymod.network.ModNetwork;
@@ -54,6 +55,7 @@ public class JellyMod {
             event.accept(ModItems.CRYSTAL_OF_EVASION);
 
             event.accept(ModBlocks.IDENTIFICATION_TABLE);
+            event.accept(ModBlocks.GEAR_AMPLIFIER);
         }
     }
 
@@ -66,6 +68,7 @@ public class JellyMod {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ModMenuTypes.IDENTIFICATION_TABLE_MENU.get(), IdentificationTableScreen::new);
+            MenuScreens.register(ModMenuTypes.GEAR_AMPLIFIER_MENU.get(), GearAmplifierScreen::new);
         }
     }
 }

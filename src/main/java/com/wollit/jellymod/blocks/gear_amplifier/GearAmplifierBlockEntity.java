@@ -1,7 +1,9 @@
-package com.wollit.jellymod.blocks.identification_table;
+package com.wollit.jellymod.blocks.gear_amplifier;
 
 import com.wollit.jellymod.blocks.ModBlockEntities;
+import com.wollit.jellymod.items.crystals.AbstractCrystalItem;
 import com.wollit.jellymod.items.weapons.AbstractMagicSword;
+import lombok.Getter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -14,7 +16,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -24,42 +25,41 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+public class GearAmplifierBlockEntity extends BlockEntity implements MenuProvider {
 
-public class IdentificationTableBlockEntity extends BlockEntity implements MenuProvider {
-
-    private final ItemStackHandler itemStackHandler = new ItemStackHandler(1) {
-
+    @Getter
+    private final ItemStackHandler itemStackHandler = new ItemStackHandler(5) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
+
         }
 
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            if (slot == 0) {
-                return stack.getItem() instanceof AbstractMagicSword;
-            } else {
-                return super.isItemValid(slot, stack);
-            }
+            return switch (slot) {
+                case 0 -> stack.getItem() instanceof AbstractMagicSword;
+                case 1, 2, 3, 4 -> stack.getItem() instanceof AbstractCrystalItem;
+                default -> super.isItemValid(slot, stack);
+            };
         }
     };
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
 
-
-    public IdentificationTableBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.IDENTIFICATION_TABLE_ENTITY.get(), blockPos, blockState);
+    public GearAmplifierBlockEntity(BlockPos blockPos, BlockState blockState) {
+        super(ModBlockEntities.GEAR_AMPLIFIER_ENTITY.get(), blockPos, blockState);
     }
 
     @Override
     public Component getDisplayName() {
-        return Component.literal("Identification Table");
+        return Component.literal("Gear Amplifier");
     }
 
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int containerId, Inventory inventory, Player player) {
-        return new IdentificationTableMenu(containerId, inventory, this, null);
+        return new GearAmplifierMenu(containerId, inventory, this, null);
     }
 
     @Override
@@ -103,9 +103,5 @@ public class IdentificationTableBlockEntity extends BlockEntity implements MenuP
         }
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
-    }
-
-    public ItemStackHandler getItemStackHandler() {
-        return itemStackHandler;
     }
 }

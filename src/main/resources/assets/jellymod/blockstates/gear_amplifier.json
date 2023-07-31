@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model":  "jellymod:block/gear_amplifier"},
+    "facing=east": { "model":  "jellymod:block/gear_amplifier", "y":  90},
+    "facing=south": { "model":  "jellymod:block/gear_amplifier", "y":  180},
+    "facing=west": { "model":  "jellymod:block/gear_amplifier", "y":  270}
+  }
+}

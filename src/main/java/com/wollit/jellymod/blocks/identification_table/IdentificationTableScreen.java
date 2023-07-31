@@ -5,18 +5,15 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.wollit.jellymod.JellyMod;
 import com.wollit.jellymod.network.ModNetwork;
 import com.wollit.jellymod.network.PacketIdentifyItemC2S;
-import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
-import java.util.Random;
 
 public class IdentificationTableScreen extends AbstractContainerScreen<IdentificationTableMenu> {
 
