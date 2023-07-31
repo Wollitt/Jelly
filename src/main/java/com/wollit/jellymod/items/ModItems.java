@@ -3,6 +3,8 @@ package com.wollit.jellymod.items;
 import com.wollit.jellymod.JellyMod;
 import com.wollit.jellymod.items.armor.ModArmorItem;
 import com.wollit.jellymod.items.armor.ModArmorMaterial;
+import com.wollit.jellymod.items.crystals.AbstractCrystalItem;
+import com.wollit.jellymod.items.crystals.CrystalOfVitalityItem;
 import com.wollit.jellymod.items.weapons.HellBow;
 import com.wollit.jellymod.items.weapons.ModItemTier;
 import com.wollit.jellymod.items.weapons.custom.BrugSword;
@@ -36,13 +38,13 @@ public class ModItems {
             () -> new BrugSword(ModItemTier.BRUG, 3, -2.4F, new Item.Properties()));
 
     public static final RegistryObject<Item> CRYSTAL_OF_VITALITY = ITEMS.register("crystal_of_vitality",
-            () -> new Item(new Item.Properties()));
+            () -> new CrystalOfVitalityItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> CRYSTAL_OF_HASTE = ITEMS.register("crystal_of_haste",
-            () -> new Item(new Item.Properties()));
+            () -> new CrystalOfVitalityItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> CRYSTAL_OF_EVASION = ITEMS.register("crystal_of_evasion",
-            () -> new Item(new Item.Properties()));
+            () -> new CrystalOfVitalityItem(new Item.Properties().stacksTo(1)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

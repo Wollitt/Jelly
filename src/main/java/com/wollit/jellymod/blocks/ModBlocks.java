@@ -1,6 +1,7 @@
 package com.wollit.jellymod.blocks;
 
 import com.wollit.jellymod.JellyMod;
+import com.wollit.jellymod.blocks.gear_amplifier.GearAmplifierBlock;
 import com.wollit.jellymod.blocks.identification_table.IdentificationTableBlock;
 import com.wollit.jellymod.items.ModItems;
 import net.minecraft.world.item.BlockItem;
@@ -20,6 +21,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> IDENTIFICATION_TABLE = registerBlock("identification_table",
             () -> new IdentificationTableBlock(BlockBehaviour.Properties.of(Material.METAL).strength(6F).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final RegistryObject<Block> GEAR_AMPLIFIER = registerBlock("gear_amplifier",
+            () -> new GearAmplifierBlock(BlockBehaviour.Properties.of(Material.METAL).strength(6F).requiresCorrectToolForDrops().noOcclusion()));
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {

@@ -1,6 +1,7 @@
 package com.wollit.jellymod.network;
 
 import com.wollit.jellymod.blocks.identification_table.IdentificationTableBlockEntity;
+import com.wollit.jellymod.items.weapons.AbstractMagicSword;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
@@ -16,8 +17,8 @@ public class PacketIdentifyItemC2S {
 
     private final BlockPos pos;
 
-    public PacketIdentifyItemC2S(BlockEntity entity) {
-        pos = entity.getBlockPos();
+    public PacketIdentifyItemC2S(BlockEntity blockEntity) {
+        pos = blockEntity.getBlockPos();
     }
 
     public PacketIdentifyItemC2S(FriendlyByteBuf buf) {
@@ -30,12 +31,13 @@ public class PacketIdentifyItemC2S {
 
     public boolean handle(Supplier<NetworkEvent.Context> supplier) {
         NetworkEvent.Context ctx = supplier.get();
+
         ctx.enqueueWork(() -> {
-            ServerLevel world = Objects.requireNonNull(ctx.getSender().getLevel());
-            BlockEntity entity = world.getBlockEntity(pos);
+            ServerLevel level = ctx.getSender().getLevel();
+            BlockEntity entity = level.getBlockEntity(pos);
             if (entity instanceof IdentificationTableBlockEntity) {
                 ItemStack itemStack = ((IdentificationTableBlockEntity) entity).getItemStackHandler().getStackInSlot(0);
-                if (itemStack.hasTag()) {
+                if (itemStack.getItem() instanceof AbstractMagicSword sword) {
                     if (!itemStack.getOrCreateTag().getBoolean("identification_status_tag")) {
                         int slots;
                         Random rand = new Random();
@@ -51,8 +53,21 @@ public class PacketIdentifyItemC2S {
                         } else {
                             slots = 4;
                         }
-                        itemStack.getOrCreateTag().putBoolean("identification_status_tag", true);
-                        itemStack.getOrCreateTag().putInt("crystals_slots_tag", slots);
+
+
+                        itemStack.getOrCreateTag().putBoolean(sword.getIDENTIFICATION_STATUS_TAG(), true);
+                        itemStack.getOrCreateTag().putInt(sword.getCRYSTAL_SLOTS_TAG(), slots);
+                        switch (slots) {
+                            case 4:
+                                itemStack.getOrCreateTag().putString(sword.getCRYSTAL_SLOT_4(), "empty");
+                            case 3:
+                                itemStack.getOrCreateTag().putString(sword.getCRYSTAL_SLOT_3(), "empty");
+                            case 2:
+                                itemStack.getOrCreateTag().putString(sword.getCRYSTAL_SLOT_2(), "empty");
+                            case 1:
+                                itemStack.getOrCreateTag().putString(sword.getCRYSTAL_SLOT_1(), "empty");
+                                break;
+                        }
                     }
                 }
             }

@@ -1,6 +1,7 @@
 package com.wollit.jellymod.blocks;
 
 import com.wollit.jellymod.JellyMod;
+import com.wollit.jellymod.blocks.gear_amplifier.GearAmplifierBlockEntity;
 import com.wollit.jellymod.blocks.identification_table.IdentificationTableBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -16,6 +17,11 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("identification_table_entity",
                     () -> BlockEntityType.Builder.of(IdentificationTableBlockEntity::new,
                             ModBlocks.IDENTIFICATION_TABLE.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<GearAmplifierBlockEntity>> GEAR_AMPLIFIER_ENTITY =
+            BLOCK_ENTITIES.register("gear_amplifier_entity",
+                    () -> BlockEntityType.Builder.of(GearAmplifierBlockEntity::new,
+                            ModBlocks.GEAR_AMPLIFIER.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
