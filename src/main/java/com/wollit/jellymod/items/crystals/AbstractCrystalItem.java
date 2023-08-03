@@ -6,8 +6,8 @@ import net.minecraft.world.item.ItemStack;
 
 abstract public class AbstractCrystalItem extends Item {
 
-    public AbstractCrystalItem(Properties properties) {
-        super(properties);
+    public AbstractCrystalItem() {
+        super(new Item.Properties().stacksTo(1));
     }
 
     public abstract void activateCrystal(ItemStack itemStack, Player player);

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model":  "jellymod:block/crystal_assembler"},
+    "facing=east": { "model":  "jellymod:block/crystal_assembler", "y":  90},
+    "facing=south": { "model":  "jellymod:block/crystal_assembler", "y":  180},
+    "facing=west": { "model":  "jellymod:block/crystal_assembler", "y":  270}
+  }
+}

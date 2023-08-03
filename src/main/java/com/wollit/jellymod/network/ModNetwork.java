@@ -43,6 +43,12 @@ public class ModNetwork {
                 .encoder(PacketAddCrystalsToGearC2S::toBytes)
                 .consumerMainThread(PacketAddCrystalsToGearC2S::handle)
                 .add();
+
+        net.messageBuilder(PacketCraftItemC2S.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(PacketCraftItemC2S::new)
+                .encoder(PacketCraftItemC2S::toBytes)
+                .consumerMainThread(PacketCraftItemC2S::handle)
+                .add();
     }
 
     public static <MSG> void sendToServer(MSG message) {

@@ -1,0 +1,17 @@
+{
+  "type": "jellymod:crystal_assembling",
+  "ingredients": [
+    {
+      "item": "jellymod:lesser_crystal_of_vitality"
+    },
+    {
+      "item": "jellymod:lesser_crystal_of_vitality"
+    },
+    {
+      "item": "jellymod:lesser_crystal_of_vitality"
+    }
+  ],
+  "output": {
+    "item": "jellymod:crystal_of_vitality"
+  }
+}

@@ -140,8 +140,6 @@ public class GearAmplifierMenu extends AbstractContainerMenu {
         });
     }
 
-
-    // TODO: change so that you can't add more items to inactive slots
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
     // must assign a slot number to each of the slots used by the GUI.
     // For this container, we can see both the tile inventory's slots as well as the player inventory slots and the hotbar.
@@ -158,7 +156,7 @@ public class GearAmplifierMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private int TE_INVENTORY_SLOT_COUNT = 5;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 5;  // must be the number of slots you have!
 
     @Override
     public @NotNull ItemStack quickMoveStack(@NotNull Player playerIn, int index) {
@@ -210,9 +208,5 @@ public class GearAmplifierMenu extends AbstractContainerMenu {
         for (int i = 0; i < 9; ++i) {
             this.addSlot(new Slot(inventory, i, 8 + i * 18, 144));
         }
-    }
-
-    public void setTE_INVENTORY_SLOT_COUNT(int TE_INVENTORY_SLOT_COUNT) {
-        this.TE_INVENTORY_SLOT_COUNT = TE_INVENTORY_SLOT_COUNT;
     }
 }

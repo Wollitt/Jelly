@@ -1,5 +1,6 @@
-package com.wollit.jellymod.blocks.identification_table;
+package com.wollit.jellymod.blocks.crystal_assembler;
 
+import com.wollit.jellymod.blocks.gear_amplifier.GearAmplifierBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -14,16 +15,14 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
-public class IdentificationTableBlock extends BaseEntityBlock {
-
+public class CrystalAssemblerBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-    public IdentificationTableBlock(Properties properties) {
-        super(properties);
+    public CrystalAssemblerBlock(Properties p_49224_) {
+        super(p_49224_);
     }
 
     /* FACING */
@@ -51,6 +50,7 @@ public class IdentificationTableBlock extends BaseEntityBlock {
 
     /* BLOCK ENTITY */
 
+    @Override
     public RenderShape getRenderShape(BlockState blockState) {
         return RenderShape.MODEL;
     }
@@ -59,31 +59,31 @@ public class IdentificationTableBlock extends BaseEntityBlock {
     public void onRemove(BlockState blockState, Level level, BlockPos blockPos, BlockState blockStateNew, boolean pIsMoving) {
         if (blockState.getBlock() != blockStateNew.getBlock()) {
             BlockEntity blockEntity = level.getBlockEntity(blockPos);
-            if (blockEntity instanceof IdentificationTableBlockEntity) {
-                ((IdentificationTableBlockEntity) blockEntity).drops();
+            if (blockEntity instanceof CrystalAssemblerBlockEntity) {
+                ((CrystalAssemblerBlockEntity) blockEntity).drops();
             }
         }
 
         super.onRemove(blockState, level, blockPos, blockStateNew, pIsMoving);
+
     }
 
     @Override
-    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (!level.isClientSide()) {
+    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult hit) {
+        if (!level.isClientSide) {
             BlockEntity blockEntity = level.getBlockEntity(blockPos);
-            if (blockEntity instanceof IdentificationTableBlockEntity) {
-                NetworkHooks.openScreen((ServerPlayer) player, (IdentificationTableBlockEntity) blockEntity, blockPos);
+            if (blockEntity instanceof CrystalAssemblerBlockEntity) {
+                NetworkHooks.openScreen((ServerPlayer) player, (CrystalAssemblerBlockEntity) blockEntity, blockPos);
             } else {
                 throw new IllegalStateException("Our container provider is missing");
             }
         }
-
         return InteractionResult.sidedSuccess(level.isClientSide());
     }
 
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new IdentificationTableBlockEntity(blockPos, blockState);
+        return new CrystalAssemblerBlockEntity(blockPos, blockState);
     }
 }
