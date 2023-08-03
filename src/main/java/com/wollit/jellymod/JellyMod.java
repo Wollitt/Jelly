@@ -3,6 +3,8 @@ package com.wollit.jellymod;
 import com.wollit.jellymod.blocks.ModBlockEntities;
 import com.wollit.jellymod.blocks.ModBlocks;
 import com.wollit.jellymod.blocks.ModMenuTypes;
+import com.wollit.jellymod.blocks.ModRecipes;
+import com.wollit.jellymod.blocks.crystal_assembler.CrystalAssemblerScreen;
 import com.wollit.jellymod.blocks.gear_amplifier.GearAmplifierScreen;
 import com.wollit.jellymod.blocks.identification_table.IdentificationTableScreen;
 import com.wollit.jellymod.items.ModItems;
@@ -19,7 +21,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-@Mod(com.wollit.jellymod.JellyMod.MOD_ID)
+@Mod(JellyMod.MOD_ID)
 public class JellyMod {
 
     public static final String MOD_ID = "jellymod";
@@ -31,11 +33,13 @@ public class JellyMod {
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModMenuTypes.register(modEventBus);
-        MinecraftForge.EVENT_BUS.register(this);
+        ModRecipes.register(modEventBus);
 
         modEventBus.addListener(this::addCreative);
         modEventBus.addListener(this::clientSetup);
         modEventBus.addListener(this::commonSetup);
+
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -45,17 +49,18 @@ public class JellyMod {
     private void addCreative(CreativeModeTabEvent.BuildContents event) {
         if (event.getTab() == ModCreativeModeTabs.JELLY_MOD_TAB) {
             event.accept(ModItems.HELL_BOW);
-            event.accept(ModItems.MINER_HELMET);
-            event.accept(ModItems.MINER_CHESTPLATE);
-            event.accept(ModItems.MINER_LEGGINGS);
-            event.accept(ModItems.MINER_BOOTS);
+//            event.accept(ModItems.MINER_HELMET);
+//            event.accept(ModItems.MINER_CHESTPLATE);
+//            event.accept(ModItems.MINER_LEGGINGS);
+//            event.accept(ModItems.MINER_BOOTS);
             event.accept(ModItems.BRUG_SWORD);
+            event.accept(ModItems.HIGHER_CRYSTAL_OF_VITALITY);
             event.accept(ModItems.CRYSTAL_OF_VITALITY);
-            event.accept(ModItems.CRYSTAL_OF_HASTE);
-            event.accept(ModItems.CRYSTAL_OF_EVASION);
+            event.accept(ModItems.LESSER_CRYSTAL_OF_VITALITY);
 
             event.accept(ModBlocks.IDENTIFICATION_TABLE);
             event.accept(ModBlocks.GEAR_AMPLIFIER);
+            event.accept(ModBlocks.CRYSTAL_ASSEMBLER);
         }
     }
 
@@ -69,6 +74,7 @@ public class JellyMod {
         public static void onClientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ModMenuTypes.IDENTIFICATION_TABLE_MENU.get(), IdentificationTableScreen::new);
             MenuScreens.register(ModMenuTypes.GEAR_AMPLIFIER_MENU.get(), GearAmplifierScreen::new);
+            MenuScreens.register(ModMenuTypes.CRYSTAL_ASSEMBLER_MENU.get(), CrystalAssemblerScreen::new);
         }
     }
 }

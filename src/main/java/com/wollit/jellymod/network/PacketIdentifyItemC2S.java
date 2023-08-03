@@ -34,9 +34,9 @@ public class PacketIdentifyItemC2S {
 
         ctx.enqueueWork(() -> {
             ServerLevel level = ctx.getSender().getLevel();
-            BlockEntity entity = level.getBlockEntity(pos);
-            if (entity instanceof IdentificationTableBlockEntity) {
-                ItemStack itemStack = ((IdentificationTableBlockEntity) entity).getItemStackHandler().getStackInSlot(0);
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof IdentificationTableBlockEntity) {
+                ItemStack itemStack = ((IdentificationTableBlockEntity) blockEntity).getItemStackHandler().getStackInSlot(0);
                 if (itemStack.getItem() instanceof AbstractMagicSword sword) {
                     if (!itemStack.getOrCreateTag().getBoolean("identification_status_tag")) {
                         int slots;

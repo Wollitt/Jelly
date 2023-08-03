@@ -26,8 +26,6 @@ public class GearAmplifierBlock extends BaseEntityBlock {
         super(properties);
     }
 
-    public static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 16, 16);
-
     /* FACING */
 
     @Nullable

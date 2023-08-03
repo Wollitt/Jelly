@@ -5,6 +5,8 @@ import com.wollit.jellymod.items.armor.ModArmorItem;
 import com.wollit.jellymod.items.armor.ModArmorMaterial;
 import com.wollit.jellymod.items.crystals.AbstractCrystalItem;
 import com.wollit.jellymod.items.crystals.CrystalOfVitalityItem;
+import com.wollit.jellymod.items.crystals.HigherCrystalOfVitalityItem;
+import com.wollit.jellymod.items.crystals.LesserCrystalOfVitalityItem;
 import com.wollit.jellymod.items.weapons.HellBow;
 import com.wollit.jellymod.items.weapons.ModItemTier;
 import com.wollit.jellymod.items.weapons.custom.BrugSword;
@@ -37,14 +39,14 @@ public class ModItems {
     public static final RegistryObject<Item> BRUG_SWORD = ITEMS.register("brug_sword",
             () -> new BrugSword(ModItemTier.BRUG, 3, -2.4F, new Item.Properties()));
 
+    public static final RegistryObject<Item> HIGHER_CRYSTAL_OF_VITALITY = ITEMS.register("higher_crystal_of_vitality",
+            HigherCrystalOfVitalityItem::new);
+
     public static final RegistryObject<Item> CRYSTAL_OF_VITALITY = ITEMS.register("crystal_of_vitality",
-            () -> new CrystalOfVitalityItem(new Item.Properties().stacksTo(1)));
+            CrystalOfVitalityItem::new);
 
-    public static final RegistryObject<Item> CRYSTAL_OF_HASTE = ITEMS.register("crystal_of_haste",
-            () -> new CrystalOfVitalityItem(new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> CRYSTAL_OF_EVASION = ITEMS.register("crystal_of_evasion",
-            () -> new CrystalOfVitalityItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> LESSER_CRYSTAL_OF_VITALITY = ITEMS.register("lesser_crystal_of_vitality",
+            LesserCrystalOfVitalityItem::new);
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
