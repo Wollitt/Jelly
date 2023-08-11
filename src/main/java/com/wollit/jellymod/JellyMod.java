@@ -54,9 +54,8 @@ public class JellyMod {
 //            event.accept(ModItems.MINER_LEGGINGS);
 //            event.accept(ModItems.MINER_BOOTS);
             event.accept(ModItems.BRUG_SWORD);
-            event.accept(ModItems.HIGHER_CRYSTAL_OF_VITALITY);
             event.accept(ModItems.CRYSTAL_OF_VITALITY);
-            event.accept(ModItems.LESSER_CRYSTAL_OF_VITALITY);
+            event.accept(ModItems.CRYSTAL_OF_ATTACK);
 
             event.accept(ModBlocks.IDENTIFICATION_TABLE);
             event.accept(ModBlocks.GEAR_AMPLIFIER);

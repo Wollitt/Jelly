@@ -3,6 +3,9 @@ package com.wollit.jellymod.capability.classes;
 import net.minecraft.nbt.CompoundTag;
 
 public abstract class AbstractClassCapability {
+    public String name;
+
+    public abstract String getClassName();
 
     public abstract <T> void useClassAbility(T object);
 

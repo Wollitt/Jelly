@@ -2,8 +2,10 @@ package com.wollit.jellymod.event;
 
 import com.wollit.jellymod.JellyMod;
 import com.wollit.jellymod.capability.classes.AbstractClassCapabilityProvider;
+import com.wollit.jellymod.capability.classes.archer.ArcherClassCapability;
 import com.wollit.jellymod.util.KeyBinding;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
@@ -22,6 +24,13 @@ public class ClientEvents {
                 Minecraft.getInstance().player.getCapability(AbstractClassCapabilityProvider.CLASS).ifPresent(playerClass -> {
                     playerClass.useClassAbility(Minecraft.getInstance().player);
                 });
+            } else if (KeyBinding.CHOOSE_CLASS_KEY.consumeClick()) {
+                Minecraft.getInstance().player.getCapability(AbstractClassCapabilityProvider.CLASS).ifPresent(playerClass -> {
+                    Minecraft.getInstance().player.sendSystemMessage(Component.literal("Your class is " + playerClass.getClassName()));
+                    if (playerClass instanceof ArcherClassCapability archer) {
+                        Minecraft.getInstance().player.sendSystemMessage(Component.literal("Your dmg multiplayer is " + archer.getRangeDmg()));
+                    }
+                });
             }
         }
     }
@@ -32,6 +41,8 @@ public class ClientEvents {
         @SubscribeEvent
         public static void onKeyRegister(RegisterKeyMappingsEvent event) {
             event.register(KeyBinding.USE_CLASS_ABILITY_KEY);
+            event.register(KeyBinding.CHOOSE_CLASS_KEY);
+            event.register(KeyBinding.TEST_KEY);
         }
     }
 }

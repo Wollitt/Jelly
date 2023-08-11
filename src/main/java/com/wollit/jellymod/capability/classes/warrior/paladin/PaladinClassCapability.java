@@ -6,7 +6,7 @@ import com.wollit.jellymod.network.PacketUsePaladinClassAbilityC2S;
 
 public class PaladinClassCapability extends WarriorClassCapability {
     public PaladinClassCapability() {
-        super(2.0F);
+        super(2.0F, "Paladin");
     }
 
     @Override

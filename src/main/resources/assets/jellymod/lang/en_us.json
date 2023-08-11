@@ -5,9 +5,8 @@
   "item.jellymod.miner_leggings": "Miner Leggings",
   "item.jellymod.miner_boots": "Miner Boots",
   "item.jellymod.brug_sword": "Brug Sword",
-  "item.jellymod.higher_crystal_of_vitality": "Higher Crystal Of Vitality",
   "item.jellymod.crystal_of_vitality": "Crystal Of Vitality",
-  "item.jellymod.lesser_crystal_of_vitality": "Lesser Crystal Of Vitality",
+  "item.jellymod.crystal_of_attack": "Crystal Of Attack",
 
   "block.jellymod.identification_table": "Identifcaition Table",
   "block.jellymod.gear_amplifier": "Gear Amplifier",
@@ -16,5 +15,6 @@
   "creativemodetab.jelly_mod_tab": "Jelly Mod",
 
   "key.category.jellymod.jelly": "Jelly Mod",
-  "key.jellymod.use_ability": "Use class ability"
+  "key.jellymod.use_ability": "Use class ability",
+  "key.jellymod.choose_class": "Choose class"
 }
