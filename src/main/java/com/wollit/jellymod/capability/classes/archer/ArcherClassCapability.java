@@ -6,17 +6,11 @@ import net.minecraftforge.common.capabilities.AutoRegisterCapability;
 
 @AutoRegisterCapability
 public class ArcherClassCapability extends AbstractClassCapability {
-    private Float rangeDamageMultiplayer = 1.25F;
+    private Float rangeDamageMultiplayer = 1.1F;
     private final String ARCHER_DAMAGE_MULTIPLAYER_TAG = "archer_damage_multiplayer";
 
-    public ArcherClassCapability() {}
-
-    public ArcherClassCapability(Float rangeDamageMultiplayer) {
-        this.rangeDamageMultiplayer = rangeDamageMultiplayer;
-    }
-
-    public String getRangeDamageTag() {
-        return ARCHER_DAMAGE_MULTIPLAYER_TAG;
+    public ArcherClassCapability() {
+        this.name = "Archer";
     }
 
     public Float getRangeDmg() {
@@ -25,6 +19,11 @@ public class ArcherClassCapability extends AbstractClassCapability {
 
     public void setRangeDmg(Float rangeDamageMultiplayer) {
         this.rangeDamageMultiplayer = rangeDamageMultiplayer;
+    }
+
+    @Override
+    public String getClassName() {
+        return name;
     }
 
     @Override
