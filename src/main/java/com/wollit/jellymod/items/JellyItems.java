@@ -1,6 +1,7 @@
 package com.wollit.jellymod.items;
 
 import com.wollit.jellymod.JellyMod;
+import com.wollit.jellymod.entity.JellyEntities;
 import com.wollit.jellymod.items.armor.ModArmorItem;
 import com.wollit.jellymod.items.armor.ModArmorMaterial;
 import com.wollit.jellymod.items.crystals.*;
@@ -9,12 +10,13 @@ import com.wollit.jellymod.items.weapons.ModItemTier;
 import com.wollit.jellymod.items.weapons.custom.BrugSword;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class ModItems {
+public class JellyItems {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, JellyMod.MOD_ID);
 
@@ -41,6 +43,10 @@ public class ModItems {
 
     public static final RegistryObject<Item> CRYSTAL_OF_ATTACK = ITEMS.register("crystal_of_attack",
             CrystalOfAttackItem::new);
+
+    public static final RegistryObject<Item> GORILLA_SPAWN_EGG = ITEMS.register("gorilla_spawn_egg",
+            () -> new ForgeSpawnEggItem(JellyEntities.GORILLA, 0xD57E36, 0x1D0D00,
+                    new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

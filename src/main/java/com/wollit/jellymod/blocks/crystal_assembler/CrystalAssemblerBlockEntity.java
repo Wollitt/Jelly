@@ -1,6 +1,6 @@
 package com.wollit.jellymod.blocks.crystal_assembler;
 
-import com.wollit.jellymod.blocks.ModBlockEntities;
+import com.wollit.jellymod.blocks.JellyBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -14,7 +14,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -49,7 +48,7 @@ public class CrystalAssemblerBlockEntity extends BlockEntity implements MenuProv
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.of(() -> new CombinedInvWrapper(inputSlots, outputSlot));
 
     public CrystalAssemblerBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.CRYSTAL_ASSEMBLER_ENTITY.get(), blockPos, blockState);
+        super(JellyBlockEntities.CRYSTAL_ASSEMBLER_ENTITY.get(), blockPos, blockState);
     }
 
     @Override

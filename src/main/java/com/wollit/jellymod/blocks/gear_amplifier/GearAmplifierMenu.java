@@ -1,11 +1,9 @@
 package com.wollit.jellymod.blocks.gear_amplifier;
 
-import com.wollit.jellymod.JellyMod;
-import com.wollit.jellymod.blocks.ModBlocks;
-import com.wollit.jellymod.blocks.ModMenuTypes;
+import com.wollit.jellymod.blocks.JellyBlocks;
+import com.wollit.jellymod.blocks.JellyMenuTypes;
 import com.wollit.jellymod.items.weapons.AbstractMagicSword;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
@@ -27,7 +25,7 @@ public class GearAmplifierMenu extends AbstractContainerMenu {
     }
 
     public GearAmplifierMenu(int id, Inventory inventory, BlockEntity blockEntity, ContainerData data) {
-        super(ModMenuTypes.GEAR_AMPLIFIER_MENU.get(), id);
+        super(JellyMenuTypes.GEAR_AMPLIFIER_MENU.get(), id);
         checkContainerSize(inventory, 5);
         this.blockEntity = (GearAmplifierBlockEntity) blockEntity;
         this.level = inventory.player.level;
@@ -195,7 +193,7 @@ public class GearAmplifierMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(@NotNull Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, ModBlocks.GEAR_AMPLIFIER.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, JellyBlocks.GEAR_AMPLIFIER.get());
     }
 
     private void addPlayerInventory(Inventory inventory) {

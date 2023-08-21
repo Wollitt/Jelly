@@ -1,13 +1,13 @@
 package com.wollit.jellymod.util;
 
-import com.wollit.jellymod.items.ModItems;
+import com.wollit.jellymod.items.JellyItems;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
 public class ModItemProperties {
     public static void addCustomItemProperties() {
-        makeBow(ModItems.HELL_BOW.get());
+        makeBow(JellyItems.HELL_BOW.get());
     }
 
     private static void makeBow(Item item) {

@@ -1,17 +1,20 @@
 package com.wollit.jellymod;
 
-import com.wollit.jellymod.blocks.ModBlockEntities;
-import com.wollit.jellymod.blocks.ModBlocks;
-import com.wollit.jellymod.blocks.ModMenuTypes;
-import com.wollit.jellymod.blocks.ModRecipes;
+import com.wollit.jellymod.blocks.JellyBlockEntities;
+import com.wollit.jellymod.blocks.JellyBlocks;
+import com.wollit.jellymod.blocks.JellyMenuTypes;
+import com.wollit.jellymod.blocks.JellyRecipes;
 import com.wollit.jellymod.blocks.crystal_assembler.CrystalAssemblerScreen;
 import com.wollit.jellymod.blocks.gear_amplifier.GearAmplifierScreen;
 import com.wollit.jellymod.blocks.identification_table.IdentificationTableScreen;
-import com.wollit.jellymod.items.ModItems;
+import com.wollit.jellymod.entity.JellyEntities;
+import com.wollit.jellymod.entity.gorilla.GorillaRenderer;
+import com.wollit.jellymod.items.JellyItems;
 import com.wollit.jellymod.network.ModNetwork;
 import com.wollit.jellymod.util.ModCreativeModeTabs;
 import com.wollit.jellymod.util.ModItemProperties;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -29,11 +32,12 @@ public class JellyMod {
     public JellyMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        ModItems.register(modEventBus);
-        ModBlocks.register(modEventBus);
-        ModBlockEntities.register(modEventBus);
-        ModMenuTypes.register(modEventBus);
-        ModRecipes.register(modEventBus);
+        JellyItems.register(modEventBus);
+        JellyBlocks.register(modEventBus);
+        JellyBlockEntities.register(modEventBus);
+        JellyMenuTypes.register(modEventBus);
+        JellyRecipes.register(modEventBus);
+        JellyEntities.register(modEventBus);
 
         modEventBus.addListener(this::addCreative);
         modEventBus.addListener(this::clientSetup);
@@ -48,18 +52,23 @@ public class JellyMod {
 
     private void addCreative(CreativeModeTabEvent.BuildContents event) {
         if (event.getTab() == ModCreativeModeTabs.JELLY_MOD_TAB) {
-            event.accept(ModItems.HELL_BOW);
+            event.accept(JellyItems.HELL_BOW);
 //            event.accept(ModItems.MINER_HELMET);
 //            event.accept(ModItems.MINER_CHESTPLATE);
 //            event.accept(ModItems.MINER_LEGGINGS);
 //            event.accept(ModItems.MINER_BOOTS);
-            event.accept(ModItems.BRUG_SWORD);
-            event.accept(ModItems.CRYSTAL_OF_VITALITY);
-            event.accept(ModItems.CRYSTAL_OF_ATTACK);
+            event.accept(JellyItems.BRUG_SWORD);
+            event.accept(JellyItems.CRYSTAL_OF_VITALITY);
+            event.accept(JellyItems.CRYSTAL_OF_ATTACK);
+            event.accept(JellyItems.GORILLA_SPAWN_EGG);
 
-            event.accept(ModBlocks.IDENTIFICATION_TABLE);
-            event.accept(ModBlocks.GEAR_AMPLIFIER);
-            event.accept(ModBlocks.CRYSTAL_ASSEMBLER);
+            event.accept(JellyBlocks.IDENTIFICATION_TABLE);
+            event.accept(JellyBlocks.GEAR_AMPLIFIER);
+            event.accept(JellyBlocks.CRYSTAL_ASSEMBLER);
+        }
+
+        if (event.getTab() == ModCreativeModeTabs.JELLY_MOD_BLOCKS) {
+            event.accept(JellyBlocks.JUNGLE_COBBLESTONE);
         }
     }
 
@@ -71,9 +80,11 @@ public class JellyMod {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            MenuScreens.register(ModMenuTypes.IDENTIFICATION_TABLE_MENU.get(), IdentificationTableScreen::new);
-            MenuScreens.register(ModMenuTypes.GEAR_AMPLIFIER_MENU.get(), GearAmplifierScreen::new);
-            MenuScreens.register(ModMenuTypes.CRYSTAL_ASSEMBLER_MENU.get(), CrystalAssemblerScreen::new);
+            MenuScreens.register(JellyMenuTypes.IDENTIFICATION_TABLE_MENU.get(), IdentificationTableScreen::new);
+            MenuScreens.register(JellyMenuTypes.GEAR_AMPLIFIER_MENU.get(), GearAmplifierScreen::new);
+            MenuScreens.register(JellyMenuTypes.CRYSTAL_ASSEMBLER_MENU.get(), CrystalAssemblerScreen::new);
+
+            EntityRenderers.register(JellyEntities.GORILLA.get(), GorillaRenderer::new);
         }
     }
 }

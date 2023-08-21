@@ -1,6 +1,6 @@
 package com.wollit.jellymod.blocks.gear_amplifier;
 
-import com.wollit.jellymod.blocks.ModBlockEntities;
+import com.wollit.jellymod.blocks.JellyBlockEntities;
 import com.wollit.jellymod.items.crystals.AbstractCrystalItem;
 import com.wollit.jellymod.items.weapons.AbstractMagicSword;
 import lombok.Getter;
@@ -48,7 +48,7 @@ public class GearAmplifierBlockEntity extends BlockEntity implements MenuProvide
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
 
     public GearAmplifierBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.GEAR_AMPLIFIER_ENTITY.get(), blockPos, blockState);
+        super(JellyBlockEntities.GEAR_AMPLIFIER_ENTITY.get(), blockPos, blockState);
     }
 
     @Override

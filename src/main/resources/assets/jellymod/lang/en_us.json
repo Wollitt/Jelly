@@ -12,7 +12,10 @@
   "block.jellymod.gear_amplifier": "Gear Amplifier",
   "block.jellymod.crystal_assembler": "Crystal Assembler",
 
-  "creativemodetab.jelly_mod_tab": "Jelly Mod",
+  "block.jellymod.jungle_cobblestone": "Jungle Cobblestone",
+
+  "creativemodetab.jellymod_tab": "Jelly Mod",
+  "creativemodetab.jellymod_blocks": "Jelly Mod Blocks",
 
   "key.category.jellymod.jelly": "Jelly Mod",
   "key.jellymod.use_ability": "Use class ability",

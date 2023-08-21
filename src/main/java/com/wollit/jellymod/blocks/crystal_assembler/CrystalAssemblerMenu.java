@@ -1,7 +1,7 @@
 package com.wollit.jellymod.blocks.crystal_assembler;
 
-import com.wollit.jellymod.blocks.ModBlocks;
-import com.wollit.jellymod.blocks.ModMenuTypes;
+import com.wollit.jellymod.blocks.JellyBlocks;
+import com.wollit.jellymod.blocks.JellyMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -23,7 +23,7 @@ public class CrystalAssemblerMenu extends AbstractContainerMenu {
     }
 
     public CrystalAssemblerMenu(int id, Inventory inventory, BlockEntity blockEntity, ContainerData data) {
-        super(ModMenuTypes.CRYSTAL_ASSEMBLER_MENU.get(), id);
+        super(JellyMenuTypes.CRYSTAL_ASSEMBLER_MENU.get(), id);
         checkContainerSize(inventory, 4);
         this.blockEntity = (CrystalAssemblerBlockEntity) blockEntity;
         this.level = inventory.player.level;
@@ -93,7 +93,7 @@ public class CrystalAssemblerMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(@NotNull Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, ModBlocks.CRYSTAL_ASSEMBLER.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, JellyBlocks.CRYSTAL_ASSEMBLER.get());
     }
 
     private void addPlayerInventory(Inventory inventory) {

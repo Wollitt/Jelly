@@ -1,7 +1,7 @@
 package com.wollit.jellymod.blocks.identification_table;
 
-import com.wollit.jellymod.blocks.ModMenuTypes;
-import com.wollit.jellymod.blocks.ModBlocks;
+import com.wollit.jellymod.blocks.JellyMenuTypes;
+import com.wollit.jellymod.blocks.JellyBlocks;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -21,7 +21,7 @@ public class IdentificationTableMenu extends AbstractContainerMenu {
     }
 
     public IdentificationTableMenu(int id, Inventory inventory, BlockEntity entity, ContainerData data) {
-        super(ModMenuTypes.IDENTIFICATION_TABLE_MENU.get(), id);
+        super(JellyMenuTypes.IDENTIFICATION_TABLE_MENU.get(), id);
         checkContainerSize(inventory, 1);
         blockEntity = (IdentificationTableBlockEntity) entity;
         this.level = inventory.player.level;
@@ -87,7 +87,7 @@ public class IdentificationTableMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, ModBlocks.IDENTIFICATION_TABLE.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, JellyBlocks.IDENTIFICATION_TABLE.get());
     }
 
     private void addPlayerInventory(Inventory inventory) {
