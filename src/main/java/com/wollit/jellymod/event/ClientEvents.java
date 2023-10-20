@@ -1,8 +1,8 @@
 package com.wollit.jellymod.event;
 
 import com.wollit.jellymod.JellyMod;
-import com.wollit.jellymod.capability.classes.AbstractClassCapabilityProvider;
-import com.wollit.jellymod.capability.classes.archer.ArcherClassCapability;
+import com.wollit.jellymod.client.ClientPlayerClassData;
+import com.wollit.jellymod.screens.ClassSelectionScreen;
 import com.wollit.jellymod.util.KeyBinding;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -20,17 +20,19 @@ public class ClientEvents {
         @SubscribeEvent
         public static void onKeyInput(InputEvent.Key event) {
             if (KeyBinding.USE_CLASS_ABILITY_KEY.consumeClick()) {
-                assert Minecraft.getInstance().player != null;
-                Minecraft.getInstance().player.getCapability(AbstractClassCapabilityProvider.CLASS).ifPresent(playerClass -> {
-                    playerClass.useClassAbility(Minecraft.getInstance().player);
-                });
-            } else if (KeyBinding.CHOOSE_CLASS_KEY.consumeClick()) {
-                Minecraft.getInstance().player.getCapability(AbstractClassCapabilityProvider.CLASS).ifPresent(playerClass -> {
-                    Minecraft.getInstance().player.sendSystemMessage(Component.literal("Your class is " + playerClass.getClassName()));
-                    if (playerClass instanceof ArcherClassCapability archer) {
-                        Minecraft.getInstance().player.sendSystemMessage(Component.literal("Your dmg multiplayer is " + archer.getRangeDmg()));
-                    }
-                });
+            }
+//            } else if (KeyBinding.CHOOSE_CLASS_KEY.consumeClick()) {
+//                Minecraft.getInstance().player.getCapability(PlayerClassCapabilityProvider.CLASS).ifPresent(playerClass -> {
+//                    Minecraft.getInstance().player.sendSystemMessage(Component.literal("Twoja klasa to:" + ClientPlayerClassData.getClassName() ));
+//                });
+//            }
+
+            if (KeyBinding.CHOOSE_CLASS_KEY.consumeClick()) {
+                if (ClientPlayerClassData.getClassName().equals("")) {
+                    Minecraft.getInstance().setScreen(new ClassSelectionScreen(Component.literal("")));
+                } else {
+                    Minecraft.getInstance().player.sendSystemMessage(Component.literal("Class: " + ClientPlayerClassData.getClassName()));
+                }
             }
         }
     }

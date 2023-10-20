@@ -1,8 +1,9 @@
-package com.wollit.jellymod.blocks.gear_amplifier;
+package com.wollit.jellymod.screens;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wollit.jellymod.JellyMod;
+import com.wollit.jellymod.blocks.gear_amplifier.GearAmplifierMenu;
 import com.wollit.jellymod.network.ModNetwork;
 import com.wollit.jellymod.network.PacketAddCrystalsToGearC2S;
 import net.minecraft.client.gui.components.Button;

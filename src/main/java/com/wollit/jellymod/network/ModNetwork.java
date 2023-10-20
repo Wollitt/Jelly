@@ -49,6 +49,18 @@ public class ModNetwork {
                 .encoder(PacketCraftItemC2S::toBytes)
                 .consumerMainThread(PacketCraftItemC2S::handle)
                 .add();
+
+        net.messageBuilder(PacketClassSelectionC2S.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(PacketClassSelectionC2S::new)
+                .encoder(PacketClassSelectionC2S::toBytes)
+                .consumerMainThread(PacketClassSelectionC2S::handle)
+                .add();
+
+        net.messageBuilder(SyncPlayerClassDataPacketS2C.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(SyncPlayerClassDataPacketS2C::new)
+                .encoder(SyncPlayerClassDataPacketS2C::toBytes)
+                .consumerMainThread(SyncPlayerClassDataPacketS2C::handle)
+                .add();
     }
 
     public static <MSG> void sendToServer(MSG message) {

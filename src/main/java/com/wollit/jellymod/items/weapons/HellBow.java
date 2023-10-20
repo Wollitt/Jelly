@@ -1,8 +1,5 @@
 package com.wollit.jellymod.items.weapons;
 
-import com.wollit.jellymod.capability.classes.AbstractClassCapabilityProvider;
-import com.wollit.jellymod.capability.classes.archer.ArcherClassCapability;
-import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -48,12 +45,6 @@ public class HellBow extends BowItem {
                         AbstractArrow abstractarrow = arrowitem.createArrow(level, itemstack, player);
                         abstractarrow = customArrow(abstractarrow);
                         abstractarrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, f * 3.0F, 1.0F);
-
-                        player.getCapability(AbstractClassCapabilityProvider.CLASS).ifPresent(playerClass -> {
-                            if (playerClass instanceof ArcherClassCapability archer) {
-                                player.sendSystemMessage(Component.literal("Dmg multiplayer on ranger is " + archer.getRangeDmg()));
-                            }
-                        });
 
                         if (f == 1.0F) {
                             abstractarrow.setCritArrow(true);

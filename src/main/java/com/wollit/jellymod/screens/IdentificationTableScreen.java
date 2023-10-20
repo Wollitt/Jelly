@@ -1,8 +1,10 @@
-package com.wollit.jellymod.blocks.identification_table;
+package com.wollit.jellymod.screens;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wollit.jellymod.JellyMod;
+import com.wollit.jellymod.blocks.identification_table.IdentificationTableBlockEntity;
+import com.wollit.jellymod.blocks.identification_table.IdentificationTableMenu;
 import com.wollit.jellymod.network.ModNetwork;
 import com.wollit.jellymod.network.PacketIdentifyItemC2S;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;

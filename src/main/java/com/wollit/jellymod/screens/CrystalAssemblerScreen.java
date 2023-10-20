@@ -1,8 +1,9 @@
-package com.wollit.jellymod.blocks.crystal_assembler;
+package com.wollit.jellymod.screens;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wollit.jellymod.JellyMod;
+import com.wollit.jellymod.blocks.crystal_assembler.CrystalAssemblerMenu;
 import com.wollit.jellymod.network.ModNetwork;
 import com.wollit.jellymod.network.PacketCraftItemC2S;
 import net.minecraft.client.gui.components.Button;

@@ -1,5 +1,6 @@
 package com.wollit.jellymod.items.weapons;
 
+import com.wollit.jellymod.client.ClientPlayerClassData;
 import com.wollit.jellymod.items.crystals.AbstractCrystalItem;
 import lombok.Getter;
 import net.minecraft.client.gui.screens.Screen;
